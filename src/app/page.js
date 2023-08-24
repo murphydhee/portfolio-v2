@@ -1,14 +1,14 @@
 "use client";
-import Intro from "./components/Intro";
+import Intro from "../app/components/Intro";
 import { AnimatePresence } from "framer-motion";
-import { useRouter } from 'next/navigation';
- const Home =({Component, pageProps})=> {
+import { useRouter } from "next/navigation";
+const Home = ({ Component, pageProps }) => {
   const router = useRouter();
   return (
     <AnimatePresence initial={false} mode={"wait"}>
-      <Intro {...pageProps} key={router.pathname} /> 
+      <Intro {...pageProps} key={router.pathname} />
     </AnimatePresence>
   );
-}
+};
 
 export default Home;
