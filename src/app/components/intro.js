@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { motion as m } from "framer-motion";
 
-export default function Home() {
+export default function Intro() {
   const router = useRouter();
 
   return (
