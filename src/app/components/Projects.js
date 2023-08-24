@@ -455,6 +455,7 @@ const Projects = ({ showModal, setShowModal }) => {
                         width={70}
                         height={30}
                         className="rounded-lg"
+                        alt="QR image"
                       />
                       <div className="flex flex-col">
                         <p className="text-white text-xl">
