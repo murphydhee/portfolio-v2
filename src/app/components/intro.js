@@ -14,7 +14,13 @@ export default function Home() {
       transition={{ duration: 0.75, ease: "easeOut" }}
     >
       <main className="flex flex-col h-screen items-center justify-center p-5 bg-stone-950 intro">
-        <Image src="/eyes.gif" width={300} height={300} className="mb-5" />
+        <Image
+          src="/eyes.gif"
+          width={300}
+          height={300}
+          className="mb-5"
+          alt="eyes gif"
+        />
         <TypeAnimation
           sequence={[
             "Psssst!🫣",

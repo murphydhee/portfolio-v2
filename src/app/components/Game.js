@@ -36,7 +36,7 @@ const Game = ({ game, setGame }) => {
       }
       setTimeout(() => setFlipped([]), 1000);
     }
-  }, [flipped]);
+  }, [cards, flipped, solved]);
 
   const handleCardClick = (index) => {
     if (

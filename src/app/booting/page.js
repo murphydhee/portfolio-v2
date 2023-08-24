@@ -33,7 +33,7 @@ export default function Home() {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [getRandomQuote]);
 
   function getRandomQuote() {
     const randomIndex = Math.floor(Math.random() * quotes.length);
@@ -48,7 +48,13 @@ export default function Home() {
     >
       <main className="flex flex-col h-screen items-center justify-center p-5 bg-slate-950 booting">
         <div className="flex flex-col items-center justify-center flex-grow">
-          <Image src="/aot.gif" width={900} height={900} className="mb-10" />
+          <Image
+            src="/aot.gif"
+            width={900}
+            height={900}
+            className="mb-10"
+            alt="Attack on Titan"
+          />
           {/*<ImSpinner8 className="animate-spin text-3xl text-white" />*/}
         </div>
         <div className="lg:ml-32 lg:mr-32">

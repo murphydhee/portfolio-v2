@@ -119,7 +119,13 @@ const Menu = ({
           )}
 
           <div className="flex items-center  bg-black mt-auto w-full bg-opacity-20 rounded-b-2xl p-3 space-x-3">
-            <Image src="/male.svg" width={40} height={40} className="" />
+            <Image
+              src="/male.svg"
+              width={40}
+              height={40}
+              className=""
+              alt="my emoji"
+            />
             <div className="flex flex-col justify-start items-start flex-grow">
               <p className="text-white text-[14px]">Mfon Ekwere</p>
               <p className="text-white text-[11px]">Frontend Developer</p>

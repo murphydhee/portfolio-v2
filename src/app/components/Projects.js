@@ -244,9 +244,9 @@ const Projects = ({ showModal, setShowModal }) => {
                   The Expert system was developed for Diagnosing Heart Disease
                   using a standard rule base. I implemented user-friendly web
                   and mobile interfaces for easy access to the system. I also
-                  designed and developed the system's architecture, including
-                  the rule base and decision tree algorithm for accurate
-                  diagnosis of heart disease.
+                  designed and developed the system architecture, including the
+                  rule base and decision tree algorithm for accurate diagnosis
+                  of heart disease.
                 </p>
               </div>
             </AnimatedItem>
@@ -310,6 +310,7 @@ const Projects = ({ showModal, setShowModal }) => {
                         width={70}
                         height={70}
                         className="rounded-full"
+                        alt="Aeoulus"
                       />
                       <div className="flex flex-col">
                         <p className="text-white text-xl">Aeolus</p>
@@ -330,7 +331,12 @@ const Projects = ({ showModal, setShowModal }) => {
                     className="basis-4/12 flex flex-col cursor-pointer bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-3 rounded-xl "
                   >
                     <div className="flex gap-3">
-                      <Image src="/scam.png" width={50} height={5} />
+                      <Image
+                        src="/scam.png"
+                        width={50}
+                        height={5}
+                        alt="scam logo"
+                      />
                       <div className="flex flex-col">
                         <p className="text-white text-xl">Scam Shield</p>
                         <p className="text-white text-base">Mobile App</p>
@@ -350,7 +356,7 @@ const Projects = ({ showModal, setShowModal }) => {
                     className="basis-4/12 flex flex-col cursor-pointer bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-3 rounded-xl "
                   >
                     <div className="flex gap-3">
-                      <Image src="/track.png" width={70} height={5} />
+                      <Image src="/track.png" width={70} height={5} alt="" />
                       <div className="flex flex-col">
                         <p className="text-white text-xl">Track it</p>
                         <p className="text-white text-base">Mobile App</p>
@@ -377,6 +383,7 @@ const Projects = ({ showModal, setShowModal }) => {
                         width={70}
                         height={30}
                         className="rounded-full"
+                        alt=""
                       />
                       <div className="flex flex-col">
                         <p className="text-white text-xl">Virtual E-Learning</p>
@@ -397,7 +404,7 @@ const Projects = ({ showModal, setShowModal }) => {
                     className="basis-4/12 flex flex-col cursor-pointer bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-3 rounded-xl "
                   >
                     <div className="flex gap-3">
-                      <Image src="/flag.svg" width={70} height={50} />
+                      <Image src="/flag.svg" width={70} height={50} alt="" />
                       <div className="flex flex-col">
                         <p className="text-white text-xl">States & LGAs API </p>
                         <p className="text-white text-base">REST API</p>
@@ -420,6 +427,7 @@ const Projects = ({ showModal, setShowModal }) => {
                         width={70}
                         height={5}
                         className="rounded-full"
+                        alt=""
                       />
                       <div className="flex flex-col">
                         <p className="text-white text-xl">Heart Disease E.S</p>
