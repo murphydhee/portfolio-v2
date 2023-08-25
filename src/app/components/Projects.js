@@ -430,10 +430,10 @@ const Projects = ({ showModal, setShowModal }) => {
                         alt=""
                       />
                       <div className="flex flex-col">
-                        <p className="text-white text-xl">Heart Disease E.S</p>
-                        <p className="text-white text-base">Mobile App</p>
+                        <p className="text-white text-xl">Disney Clone</p>
+                        <p className="text-white text-base">Web App</p>
                         <p className="text-white text-[10px]">
-                          Flutter & Node JS
+                          React.JS, Redux & Firebase.
                         </p>
                       </div>
                     </div>
@@ -459,11 +459,11 @@ const Projects = ({ showModal, setShowModal }) => {
                       />
                       <div className="flex flex-col">
                         <p className="text-white text-xl">
-                          QR Code attenance system
+                          QR Code attendance system
                         </p>
-                        <p className="text-white text-base">Mobile App</p>
+                        <p className="text-white text-base">Web App</p>
                         <p className="text-white text-[10px]">
-                          Flutter & Firebase
+                          React.JS & Firebase.
                         </p>
                       </div>
                     </div>
