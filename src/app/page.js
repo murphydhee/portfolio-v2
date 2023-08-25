@@ -1,5 +1,5 @@
 "use client";
-import Intro from "./components/Intro";
+import Intro from "./components/intro";
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 const Home = ({ Component, pageProps }) => {
