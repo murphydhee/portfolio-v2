@@ -10,7 +10,7 @@ const Projects = ({ showModal, setShowModal }) => {
   const [scam, setScam] = useState(false);
   const [track, setTrack] = useState(false);
   const [virtual, setVirtual] = useState(false);
-  const [statesapi, setStatesapi] = useState(false);
+  const [chatto, setChatto] = useState(false);
   const [heart, setHeart] = useState(false);
   const [qr, setQR] = useState(false);
   return (
@@ -188,32 +188,30 @@ const Projects = ({ showModal, setShowModal }) => {
             </AnimatedItem>
           )}
 
-          {statesapi && (
+          {chatto && (
             <AnimatedItem animationConfig={{ delay: 0.1 }}>
               <BsChevronLeft
                 className="text-white mb-4 text-lg cursor-pointer"
                 onClick={() => {
                   const audio = new Audio("click.wav");
                   audio.play();
-                  setStatesapi(false);
+                  setChatto(false);
                 }}
               />
               <div className="flex flex-col w-full">
                 <h1 className="text-4xl font-medium text-white border-b-2 pb-2 mb-4 border-gray-400 border-opacity-10 w-full">
-                  Nigeria States & Local Government API
+                  Chatto
                 </h1>
                 <p className="text-white text-sm mb-5">
-                  Built with NodeJS & Postman{" "}
+                  Built with Vue.Js & Chat-Engine.io
                 </p>
 
                 <h2 className="text-xl font-medium text-white mb-3">
-                  About Nigeria States & Local Government API
+                  About Chatto
                 </h2>
                 <p className="text-white text-sm mb-5 leading-6">
-                  A mini project that compiles all the States and Local
-                  Governments in an API. The API was implemented in NodeJS for
-                  developers to fetch Nigeria states and Local Government
-                  Dynamically.
+                  A mini project that is built using a real-time chat app using
+                  Vue.js and ChatEngine.io.
                 </p>
               </div>
             </AnimatedItem>
@@ -288,7 +286,7 @@ const Projects = ({ showModal, setShowModal }) => {
             !scam &&
             !track &&
             !virtual &&
-            !statesapi &&
+            !chatto &&
             !heart &&
             !qr && (
               <div className="flex flex-col w-full ">
@@ -399,16 +397,26 @@ const Projects = ({ showModal, setShowModal }) => {
                     onClick={() => {
                       const audio = new Audio("click.wav");
                       audio.play();
-                      setStatesapi(true);
+                      setChatto(true);
                     }}
                     className="basis-4/12 flex flex-col cursor-pointer bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-3 rounded-xl "
                   >
                     <div className="flex gap-3">
-                      <Image src="/flag.svg" width={70} height={50} alt="" />
+                      <Image
+                        src="/chatto.png"
+                        width={65}
+                        height={40}
+                        alt=""
+                        className="rounded-full"
+                      />
                       <div className="flex flex-col">
-                        <p className="text-white text-xl">States & LGAs API </p>
-                        <p className="text-white text-base">REST API</p>
-                        <p className="text-white text-[10px]">Node & Postman</p>
+                        <p className="text-white text-xl">Chatto </p>
+                        <p className="text-white text-base">
+                          A Chat application using vue.js and ChatEngine.io
+                        </p>
+                        <p className="text-white text-[10px]">
+                          Vue.Js & ChatEngine.io
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -423,14 +431,14 @@ const Projects = ({ showModal, setShowModal }) => {
                   >
                     <div className="flex gap-3">
                       <Image
-                        src="/heart.png"
+                        src="/disney.png"
                         width={70}
                         height={5}
                         className="rounded-full"
                         alt=""
                       />
                       <div className="flex flex-col">
-                        <p className="text-white text-xl">Disney Clone</p>
+                        <p className="text-white text-xl">Disney plus Clone</p>
                         <p className="text-white text-base">Web App</p>
                         <p className="text-white text-[10px]">
                           React.JS, Redux & Firebase.
