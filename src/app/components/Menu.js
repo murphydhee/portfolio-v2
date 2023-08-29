@@ -42,7 +42,7 @@ const Menu = ({
             {/*  <p className="text-center smbelow:hidden">Projects</p>*/}
             {/*</div>*/}
             <Link
-              href="https://drive.google.com/file/d/11DUIKYSHdVQ-An9-0nHBJJf9Z5LMYqWi/view?usp=sharing"
+              href="https://docs.google.com/document/d/1KOvz-VVwrqxER2cPQxNk5z1gsDOi0WrXTLU2fZA3amE/edit?usp=sharing"
               target="_blank"
               onClick={() => {
                 const audio = new Audio("click.wav");
