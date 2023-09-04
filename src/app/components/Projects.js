@@ -96,8 +96,15 @@ const Projects = ({ showModal, setShowModal }) => {
                   To Do List
                 </h1>
                 <p className="text-white text-sm mb-5">
-                  Built with Javascript{" "}
+                  Built with Vanilla Javascript{" "}
                 </p>
+                <Link
+                  href="https://mfon-todo-lists.netlify.app"
+                  target="_blank"
+                  className="text-gray-400 text-[12px] mb-5"
+                >
+                  To do list app
+                </Link>
 
                 <h2 className="text-xl font-medium text-white mb-3">
                   About TO DO List
@@ -121,21 +128,20 @@ const Projects = ({ showModal, setShowModal }) => {
               />
               <div className="flex flex-col w-full">
                 <h1 className="text-4xl font-medium text-white border-b-2 pb-2 mb-4 border-gray-400 border-opacity-10 w-full">
-                  Track it
+                  Anime Show Tracker
                 </h1>
                 <p className="text-white text-sm mb-5">
-                  Built with Flutter, Google Maps API & Firebase{" "}
+                  Built with Vue.Js, AnList API & Firebase{" "}
                 </p>
 
                 <h2 className="text-xl font-medium text-white mb-3">
-                  About Track it
+                  About Anime Show Tracker
                 </h2>
                 <p className="text-white text-sm mb-5 leading-6">
-                  Track It is a powerful mobile app designed to protect your
-                  smartphone and enhance your peace of mind. With features like
-                  IMEI verification, stolen phone reporting, and live location
-                  tracking, Track It empowers you to safeguard your device and
-                  recover it in case of loss or theft.
+                  Anime Show Tracker is a powerful web app designed to help keep
+                  {/* eslint-disable-next-line react/no-unescaped-entities */}
+                  track of Anime's you are currently watching and Anime's you
+                  intend to keep watching
                 </p>
               </div>
             </AnimatedItem>
@@ -153,34 +159,29 @@ const Projects = ({ showModal, setShowModal }) => {
               />
               <div className="flex flex-col w-full">
                 <h1 className="text-4xl font-medium text-white border-b-2 pb-2 mb-4 border-gray-400 border-opacity-10 w-full">
-                  Virtual E-Learning system
+                  Learning Management system
                 </h1>
                 <p className="text-white text-sm mb-5">
-                  Built with NodeJS, ExpressJS, Socket.io, MongoDB & Bootstrap{" "}
+                  Built with Vue.Js, SASS.{" "}
                 </p>
 
                 <h2 className="text-xl font-medium text-white mb-3">
-                  About Virtual E-Learning system
+                  About Learning management system
                 </h2>
                 <p className="text-white text-sm mb-5 leading-6">
-                  This is a virtual e-learning system developed for NILEST. It
-                  allows lecturers host lectures online and also allow students
-                  to join virtually {"("}Just like Zoom & Google Meet
-                  {")"}
+                  This is a virtual learning management system developed for
+                  secondary and tertiary institutions to help teachers and
+                  students alike take tests assignments and quiz.{" "}
                 </p>
                 <div>
                   <ol className="text-white text-sm leading-6" typeof="list">
                     <li>
                       1. Designed and developed the architecture of the
-                      web-based Virtual E-Learning System for NILEST.
+                      web-based E-Learning management System.
                     </li>
                     <li>
-                      2. Implemented Socket.io for real-time video conferencing
-                      and communication in virtual classrooms.
-                    </li>
-                    <li>
-                      3. Integrated MongoDB for secure and efficient storage of
-                      user data.
+                      2. Designed and built the frontend for both student and
+                      teachers dashboards and screens.
                     </li>
                   </ol>
                 </div>
@@ -229,22 +230,26 @@ const Projects = ({ showModal, setShowModal }) => {
               />
               <div className="flex flex-col w-full">
                 <h1 className="text-4xl font-medium text-white border-b-2 pb-2 mb-4 border-gray-400 border-opacity-10 w-full">
-                  Expert System for Diagnosing Heart Disease
+                  Disney plus clone (in progress)
                 </h1>
                 <p className="text-white text-sm mb-5">
-                  Built with Flutter, Node JS, MongoDB & Bootstrap
+                  Built with React, Redux, & firebase
                 </p>
+                <Link
+                  href="https://github.com/murphydhee/disney-plus-clone"
+                  target="_blank"
+                  className="text-gray-400 text-[12px] mb-5"
+                >
+                  A disney plus clone (repo)
+                </Link>
 
                 <h2 className="text-xl font-medium text-white mb-3">
-                  About Expert System
+                  About Disney plus clone
                 </h2>
                 <p className="text-white text-sm mb-5 leading-6">
-                  The Expert system was developed for Diagnosing Heart Disease
-                  using a standard rule base. I implemented user-friendly web
-                  and mobile interfaces for easy access to the system. I also
-                  designed and developed the system architecture, including the
-                  rule base and decision tree algorithm for accurate diagnosis
-                  of heart disease.
+                  Being a fan of movies I decided to build a replica of one of
+                  my favourite streaming services, it has not been completed yet
+                  due to health reasons but ill update once i am done.
                 </p>
               </div>
             </AnimatedItem>
@@ -262,19 +267,19 @@ const Projects = ({ showModal, setShowModal }) => {
               />
               <div className="flex flex-col w-full">
                 <h1 className="text-4xl font-medium text-white border-b-2 pb-2 mb-4 border-gray-400 border-opacity-10 w-full">
-                  QR Code attenance system
+                  QR Code attendance system
                 </h1>
                 <p className="text-white text-sm mb-5">
-                  Built with Flutter & Firebase
+                  Built with React & Firebase
                 </p>
 
                 <h2 className="text-xl font-medium text-white mb-3">
-                  About QR Code attenance system
+                  About QR Code attendance system
                 </h2>
                 <p className="text-white text-sm mb-5 leading-6">
                   The QR Code Attendance System is a mobile application
-                  developed using Flutter and Firebase that simplifies the
-                  process of tracking attendance for various events, classes, or
+                  developed using React and Firebase that simplifies the process
+                  of tracking attendance for various events, classes, or
                   meetings. This modern solution replaces the traditional
                   paper-based attendance sheet with an efficient digital system.
                 </p>
@@ -330,16 +335,18 @@ const Projects = ({ showModal, setShowModal }) => {
                   >
                     <div className="flex gap-3">
                       <Image
-                        src="/scam.png"
-                        width={50}
+                        src="/list.svg"
+                        width={20}
                         height={5}
-                        alt="scam logo"
+                        alt="List logo"
                       />
                       <div className="flex flex-col">
-                        <p className="text-white text-xl">Scam Shield</p>
-                        <p className="text-white text-base">Mobile App</p>
+                        <p className="text-white text-xl">To Do List</p>
+                        <p className="text-white text-base">
+                          A simple To-do-list app
+                        </p>
                         <p className="text-white text-[10px]">
-                          Flutter & Firebase
+                          Vanilla JavaScript
                         </p>
                       </div>
                     </div>
@@ -354,12 +361,14 @@ const Projects = ({ showModal, setShowModal }) => {
                     className="basis-4/12 flex flex-col cursor-pointer bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-3 rounded-xl "
                   >
                     <div className="flex gap-3">
-                      <Image src="/track.png" width={70} height={5} alt="" />
+                      <Image src="/eyes.gif" width={70} height={5} alt="" />
                       <div className="flex flex-col">
-                        <p className="text-white text-xl">Track it</p>
-                        <p className="text-white text-base">Mobile App</p>
+                        <p className="text-white text-xl">Anime Show Tracker</p>
+                        <p className="text-white text-base">
+                          Tracking Anime shows
+                        </p>
                         <p className="text-white text-[10px]">
-                          Flutter, Google Maps API & Firebase
+                          Vue.JS, SASS, Nuxt
                         </p>
                       </div>
                     </div>
@@ -377,17 +386,19 @@ const Projects = ({ showModal, setShowModal }) => {
                   >
                     <div className="flex gap-3">
                       <Image
-                        src="/nilest.svg"
+                        src="/learn.svg"
                         width={70}
                         height={30}
                         className="rounded-full"
                         alt=""
                       />
                       <div className="flex flex-col">
-                        <p className="text-white text-xl">Virtual E-Learning</p>
+                        <p className="text-white text-xl">
+                          Learning management system
+                        </p>
                         <p className="text-white text-base">Website</p>
                         <p className="text-white text-[10px]">
-                          Node, Express, Socket.io & MongoDB
+                          Vue.js, Sass, Nuxt
                         </p>
                       </div>
                     </div>
