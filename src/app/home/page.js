@@ -123,6 +123,9 @@ const Page = () => {
         setGithubOpen={setIsGithubOpen}
         setArticlesOpen={setIsArticlesOpen}
         setYoutubeOpen={setIsYoutubeOpen}
+        setGamesOpen={setIsGamesOpen}
+        setSubbyOpen={setIsSubbyOpen}
+        setPhotosOpen={setIsPhotosOpen}
       />
     </main>
   );

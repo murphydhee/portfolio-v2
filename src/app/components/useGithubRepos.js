@@ -23,14 +23,20 @@ export default function useGithubRepos() {
     let cancelled = false;
 
     fetch(
-      `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=pushed&direction=desc&per_page=6`,
+      `https://api.github.com/users/${GITHUB_USERNAME}/repos?type=owner&sort=pushed&direction=desc&per_page=30`,
     )
       .then((response) => {
         if (!response.ok) throw new Error("GitHub lookup failed");
         return response.json();
       })
-      .then((repos) => {
+      .then((allRepos) => {
         if (cancelled) return;
+        // Forks and archived repos clutter an activity showcase — only
+        // original, active repos. The REST API's own public-repos endpoint
+        // already excludes private repos entirely (no auth = no private data).
+        const repos = allRepos
+          .filter((repo) => !repo.fork && !repo.archived && !repo.private)
+          .slice(0, 6);
         setState({
           status: "ready",
           repos: repos.map((repo) => ({

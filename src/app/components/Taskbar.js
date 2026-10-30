@@ -1,9 +1,10 @@
 import React from "react";
+import Image from "next/image";
 import { MdWindow } from "react-icons/md";
 import { FcFolder } from "react-icons/fc";
 import { VscGithubInverted } from "react-icons/vsc";
 import { AiFillLinkedin } from "react-icons/ai";
-import { FaStickyNote } from "react-icons/fa";
+import { FaStickyNote, FaGamepad, FaImages, FaFilePdf } from "react-icons/fa";
 import { BsYoutube } from "react-icons/bs";
 import Link from "next/link";
 
@@ -13,7 +14,7 @@ const playClick = () => {
 };
 
 const iconButtonClasses =
-  "flex items-center justify-center w-12 h-12 rounded-xl transition-transform duration-150 ease-out hover:scale-125 hover:-translate-y-1 focus-visible:scale-125 focus-visible:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white";
+  "flex items-center justify-center w-11 h-11 rounded-xl transition-transform duration-150 ease-out hover:scale-125 hover:-translate-y-1 focus-visible:scale-125 focus-visible:-translate-y-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white flex-shrink-0";
 
 const DockTooltip = ({ children }) => (
   <span
@@ -35,9 +36,12 @@ const Taskbar = ({
   setGithubOpen,
   setArticlesOpen,
   setYoutubeOpen,
+  setGamesOpen,
+  setSubbyOpen,
+  setPhotosOpen,
 }) => {
   return (
-    <div className="flex items-end gap-2 rounded-2xl border border-white/10 bg-slate-900/60 px-3 py-2 shadow-2xl backdrop-blur-2xl mb-2">
+    <div className="flex items-end gap-1.5 rounded-2xl border border-white/10 bg-slate-900/60 px-3 py-2 shadow-2xl backdrop-blur-2xl mb-2 max-w-[95vw] overflow-x-auto">
       <div className="group relative">
         <button
           type="button"
@@ -51,7 +55,7 @@ const Taskbar = ({
             setIsStartMenuOpen(!isStartMenuOpen);
           }}
         >
-          <MdWindow className="text-3xl text-blue-400" aria-hidden="true" />
+          <MdWindow className="text-2xl text-blue-400" aria-hidden="true" />
         </button>
         <DockTooltip>Start Menu</DockTooltip>
       </div>
@@ -66,9 +70,67 @@ const Taskbar = ({
             setShowModal(true);
           }}
         >
-          <FcFolder className="text-3xl" aria-hidden="true" />
+          <FcFolder className="text-2xl" aria-hidden="true" />
         </button>
         <DockTooltip>Projects</DockTooltip>
+      </div>
+
+      <div className="group relative">
+        <Link
+          href="https://docs.google.com/document/d/1KOvz-VVwrqxER2cPQxNk5z1gsDOi0WrXTLU2fZA3amE/edit?usp=sharing"
+          target="_blank"
+          aria-label="Open resume (opens in a new tab)"
+          onClick={playClick}
+          className={iconButtonClasses}
+        >
+          <FaFilePdf className="text-xl text-red-500" aria-hidden="true" />
+        </Link>
+        <DockTooltip>Resume</DockTooltip>
+      </div>
+
+      <div className="group relative">
+        <button
+          type="button"
+          aria-label="Games"
+          className={iconButtonClasses}
+          onClick={() => {
+            playClick();
+            setGamesOpen(true);
+          }}
+        >
+          <FaGamepad className="text-xl text-green-500" aria-hidden="true" />
+        </button>
+        <DockTooltip>Games</DockTooltip>
+      </div>
+
+      <div className="group relative">
+        <button
+          type="button"
+          aria-label="Subby"
+          className={iconButtonClasses}
+          onClick={() => {
+            playClick();
+            setSubbyOpen(true);
+          }}
+        >
+          <Image src="/subby.png" width={26} height={26} className="rounded-md" alt="" />
+        </button>
+        <DockTooltip>Subby</DockTooltip>
+      </div>
+
+      <div className="group relative">
+        <button
+          type="button"
+          aria-label="Photos"
+          className={iconButtonClasses}
+          onClick={() => {
+            playClick();
+            setPhotosOpen(true);
+          }}
+        >
+          <FaImages className="text-xl text-sky-400" aria-hidden="true" />
+        </button>
+        <DockTooltip>Photos</DockTooltip>
       </div>
 
       <div className="mx-1 h-10 w-px self-center bg-white bg-opacity-10" aria-hidden="true" />
@@ -83,7 +145,7 @@ const Taskbar = ({
             setGithubOpen(true);
           }}
         >
-          <VscGithubInverted className="text-2xl text-gray-300" aria-hidden="true" />
+          <VscGithubInverted className="text-xl text-gray-300" aria-hidden="true" />
         </button>
         <DockTooltip>GitHub</DockTooltip>
       </div>
@@ -96,7 +158,7 @@ const Taskbar = ({
           onClick={playClick}
           className={iconButtonClasses}
         >
-          <AiFillLinkedin className="text-3xl text-[#0A66C2]" aria-hidden="true" />
+          <AiFillLinkedin className="text-2xl text-[#0A66C2]" aria-hidden="true" />
         </Link>
         <DockTooltip>LinkedIn</DockTooltip>
       </div>
@@ -111,7 +173,7 @@ const Taskbar = ({
             setArticlesOpen(true);
           }}
         >
-          <FaStickyNote className="text-2xl text-[#00acee]" aria-hidden="true" />
+          <FaStickyNote className="text-xl text-[#00acee]" aria-hidden="true" />
         </button>
         <DockTooltip>Articles</DockTooltip>
       </div>
@@ -126,7 +188,7 @@ const Taskbar = ({
             setYoutubeOpen(true);
           }}
         >
-          <BsYoutube className="text-2xl text-[#FF0000]" aria-hidden="true" />
+          <BsYoutube className="text-xl text-[#FF0000]" aria-hidden="true" />
         </button>
         <DockTooltip>YouTube</DockTooltip>
       </div>

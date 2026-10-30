@@ -24,15 +24,21 @@ async function resolveChannelId() {
 export async function GET() {
   try {
     const channelId = await resolveChannelId();
-    const parser = new Parser();
+    const parser = new Parser({
+      customFields: {
+        // YouTube's own feed carries the raw video ID in this dedicated
+        // namespaced field — far more reliable than parsing it back out of
+        // the Atom <id> ("yt:video:<ID>") or the watch-page link.
+        item: [["yt:videoId", "videoId"]],
+      },
+    });
     const feed = await parser.parseURL(
       `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`,
     );
 
     const videos = (feed.items || []).slice(0, 6).map((item, index) => {
-      // YouTube's atom id is "yt:video:<ID>"; the watch link also carries
-      // ?v=<ID>. Either gets us the predictable, no-auth thumbnail URL.
       const videoId =
+        item.videoId ||
         item.id?.replace("yt:video:", "") ||
         /[?&]v=([a-zA-Z0-9_-]{11})/.exec(item.link || "")?.[1] ||
         null;
