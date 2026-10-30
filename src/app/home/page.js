@@ -5,7 +5,7 @@ import Game from "../components/Game";
 import Education from "../components/Education";
 import Impact from "../components/Impact";
 import Experience from "../components/Experience";
-import Projects from "../components/Projects";
+import ProjectsWindow from "../components/ProjectsWindow";
 import Menu from "../components/Menu";
 import TaskbarDock from "../components/TaskbarDock";
 import StatusBar from "../components/StatusBar";
@@ -17,6 +17,8 @@ import YoutubeWindow from "../components/YoutubeWindow";
 import GamesWindow from "../components/GamesWindow";
 import SubbyWindow from "../components/SubbyWindow";
 import PhotosWindow from "../components/PhotosWindow";
+import TicTacToeWindow from "../components/TicTacToeWindow";
+import PuzzleWindow from "../components/PuzzleWindow";
 
 const Page = () => {
   const [visitorName, setVisitorName] = useState("");
@@ -28,6 +30,8 @@ const Page = () => {
   const [isGamesOpen, setIsGamesOpen] = useState(false);
   const [isSubbyOpen, setIsSubbyOpen] = useState(false);
   const [isPhotosOpen, setIsPhotosOpen] = useState(false);
+  const [isTicTacToeOpen, setIsTicTacToeOpen] = useState(false);
+  const [isPuzzleOpen, setIsPuzzleOpen] = useState(false);
 
   const [showModal, setShowModal] = useState(false);
   const [experience, setexperience] = useState(false);
@@ -85,13 +89,20 @@ const Page = () => {
         isOpen={isGamesOpen}
         onClose={() => setIsGamesOpen(false)}
         onPlayMemoryMatch={() => setGame(true)}
+        onPlayTicTacToe={() => setIsTicTacToeOpen(true)}
+        onPlayPuzzle={() => setIsPuzzleOpen(true)}
       />
+      <TicTacToeWindow
+        isOpen={isTicTacToeOpen}
+        onClose={() => setIsTicTacToeOpen(false)}
+      />
+      <PuzzleWindow isOpen={isPuzzleOpen} onClose={() => setIsPuzzleOpen(false)} />
       <SubbyWindow isOpen={isSubbyOpen} onClose={() => setIsSubbyOpen(false)} />
       <PhotosWindow isOpen={isPhotosOpen} onClose={() => setIsPhotosOpen(false)} />
       <Education education={education} setEducation={setEducation} />
       <Impact impact={impact} setImpact={setImpact} />
       <Experience experience={experience} setexperience={setexperience} />
-      <Projects showModal={showModal} setShowModal={setShowModal} />
+      <ProjectsWindow isOpen={showModal} onClose={() => setShowModal(false)} />
       <DesktopPet petId={petId} />
       <PetPicker
         isOpen={isPetPickerOpen}

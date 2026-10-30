@@ -2,7 +2,8 @@
 import React from "react";
 import Modal from "./Modal";
 import { BsGrid3X3GapFill } from "react-icons/bs";
-import { FaHandRock } from "react-icons/fa";
+import { FaHandRock, FaPuzzlePiece } from "react-icons/fa";
+import { GiTicTacToe } from "react-icons/gi";
 
 const playClick = () => {
   const audio = new Audio("click.wav");
@@ -26,7 +27,13 @@ const GameCard = ({ icon, label, blurb, onClick }) => (
 
 // A small launcher grid — more games get added here over time. In-site
 // games open their own window; external ones open in a new tab.
-const GamesWindow = ({ isOpen, onClose, onPlayMemoryMatch }) => {
+const GamesWindow = ({
+  isOpen,
+  onClose,
+  onPlayMemoryMatch,
+  onPlayTicTacToe,
+  onPlayPuzzle,
+}) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} className="w-[480px] smbelow:w-[95%]">
       <div className="flex flex-col w-full">
@@ -41,6 +48,24 @@ const GamesWindow = ({ isOpen, onClose, onPlayMemoryMatch }) => {
             onClick={() => {
               onClose();
               onPlayMemoryMatch();
+            }}
+          />
+          <GameCard
+            icon={<GiTicTacToe className="text-blue-400 text-5xl" aria-hidden="true" />}
+            label="Tic Tac Toe"
+            blurb="You can't win. AJ sees to that."
+            onClick={() => {
+              onClose();
+              onPlayTicTacToe();
+            }}
+          />
+          <GameCard
+            icon={<FaPuzzlePiece className="text-pink-400 text-5xl" aria-hidden="true" />}
+            label="Bring Your Own Puzzle"
+            blurb="Upload a photo, piece it back together"
+            onClick={() => {
+              onClose();
+              onPlayPuzzle();
             }}
           />
           <a
