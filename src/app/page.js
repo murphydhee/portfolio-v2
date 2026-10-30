@@ -1,14 +1,5 @@
-"use client";
-import Intro from "./components/intro";
-import { AnimatePresence } from "framer-motion";
-import { useRouter } from "next/navigation";
-const Home = ({ Component, pageProps }) => {
-  const router = useRouter();
-  return (
-    <AnimatePresence initial={false} mode={"wait"}>
-      <Intro {...pageProps} key={router.pathname} />
-    </AnimatePresence>
-  );
-};
+import { redirect } from "next/navigation";
 
-export default Home;
+export default function Home() {
+  redirect("/booting");
+}

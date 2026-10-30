@@ -40,19 +40,21 @@ const Page = () => {
       animate={{ y: "0" }}
       transition={{ duration: 0.75, ease: "easeOut" }}
     >
-      <main className="flex flex-col h-screen items-center justify-center bg-gradient-to-r from-cyan-500 to-blue-500">
+      <main className="relative flex flex-col h-screen items-center justify-center bg-slate-950 overflow-hidden">
         <div
-          className={
-            blur
-              ? "flex flex-col items-center w-screen justify-center flex-grow backdrop-blur-md"
-              : "flex flex-col items-center justify-center flex-grow"
-          }
+          aria-hidden="true"
+          className="pointer-events-none absolute w-[500px] h-[500px] rounded-full bg-blue-500 opacity-20 blur-3xl"
+        />
+        <div
+          className={`relative flex flex-col items-center justify-center bg-slate-900 bg-opacity-60 backdrop-blur-2xl border border-gray-400 border-opacity-10 rounded-2xl shadow-2xl px-10 py-12 w-[420px] smbelow:w-[90%] transition ${
+            blur ? "backdrop-blur-md" : ""
+          }`}
         >
           <Image
             src="/me.GIF"
-            width={200}
-            height={200}
-            className="mb-6 rounded-full"
+            width={360}
+            height={270}
+            className="mb-6 w-[120px] h-[120px] object-cover rounded-full ring-2 ring-white ring-opacity-20"
             alt="Mfon Ekwere"
             unoptimized
           />
@@ -70,8 +72,8 @@ const Page = () => {
             ]}
             wrapper="h1"
             speed={50}
-            style={{ display: "inline-block" }}
-            className="text-4xl text-white font-barriecito text-center mb-4"
+            style={{ display: "inline-block", minHeight: "1.2em" }}
+            className="text-2xl text-white font-barriecito text-center mb-6"
           />
           <label htmlFor="visitor-name" className="sr-only">
             Enter your name
@@ -79,7 +81,7 @@ const Page = () => {
           <input
             id="visitor-name"
             type="text"
-            className="border-gray-400 border-b-2 w-[300px] rounded-md bg-gray-950 p-2 text-white outline-none mb-5 focus-visible:ring-2 focus-visible:ring-white"
+            className="border-gray-400 border-opacity-30 border-b-2 w-full rounded-md bg-black bg-opacity-30 p-2 text-white outline-none mb-5 focus-visible:ring-2 focus-visible:ring-white"
             placeholder="Enter your name"
             name="yourname"
             value={name}
@@ -90,7 +92,7 @@ const Page = () => {
           />
           <button
             type="button"
-            className="py-3 px-1 text-white rounded-md w-[150px] bg-white bg-opacity-20 backdrop-blur-2xl shadow-lg flex items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="py-3 px-1 text-white rounded-md w-full bg-white bg-opacity-10 hover:bg-opacity-20 transition shadow-lg flex items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             onClick={proceed}
             disabled={loading}
           >
@@ -103,11 +105,10 @@ const Page = () => {
                 Please Wait...
               </div>
             ) : (
-              " Login"
+              "Login"
             )}
           </button>
         </div>
-        <div className="flex items-center justify-center p-3 backdrop-blur-lg space-x-6 w-screen"></div>
       </main>
     </m.div>
   );

@@ -1,13 +1,16 @@
 "use client";
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import React, { useState, useEffect, useCallback, useMemo, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { ImSpinner8 } from "react-icons/im";
 import { TypeAnimation } from "react-type-animation";
 import { motion as m } from "framer-motion";
 
+// aot.gif measured at 50 frames @ 20fps = one full loop every 2500ms.
+const GIF_LOOP_MS = 2500;
+
 export default function Home() {
   const router = useRouter();
+  const mountTimeRef = useRef(null);
 
   const quotes = useMemo(
     () => [
@@ -37,6 +40,7 @@ export default function Home() {
   const [currentQuote, setCurrentQuote] = useState("");
 
   useEffect(() => {
+    mountTimeRef.current = performance.now();
     setCurrentQuote(getRandomQuote());
 
     const interval = setInterval(() => {
@@ -46,35 +50,36 @@ export default function Home() {
     return () => clearInterval(interval);
   }, [getRandomQuote]);
 
+  // Never cut the gif off mid-loop: wait out whatever's left of the current
+  // cycle before navigating, so it always finishes a clean, full play.
+  const goToWelcome = useCallback(() => {
+    const elapsed = performance.now() - (mountTimeRef.current ?? 0);
+    const remainder = elapsed % GIF_LOOP_MS;
+    const delay = remainder === 0 ? 0 : GIF_LOOP_MS - remainder;
+    setTimeout(() => router.push("/welcome"), delay);
+  }, [router]);
+
   return (
     <m.div
       initial={{ y: "100%" }}
       animate={{ y: "0" }}
       transition={{ duration: 0.75, ease: "easeOut" }}
-      exitOpacity={1}
     >
       <main className="flex flex-col h-screen items-center justify-center p-5 bg-slate-950 booting">
         <div className="flex flex-col items-center justify-center flex-grow">
           <Image
             src="/aot.gif"
             width={900}
-            height={900}
+            height={504}
             className="mb-10"
             alt="Attack on Titan animation"
             unoptimized
             priority
           />
-          {/*<ImSpinner8 className="animate-spin text-3xl text-white" />*/}
         </div>
         <div className="lg:ml-32 lg:mr-32">
           <TypeAnimation
-            sequence={[
-              currentQuote,
-              700,
-              () => {
-                router.push("/welcome");
-              },
-            ]}
+            sequence={[currentQuote, 700, goToWelcome]}
             wrapper="span"
             speed={50}
             style={{ fontSize: "18px", display: "inline-block" }}
