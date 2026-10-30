@@ -7,7 +7,7 @@ import Impact from "../components/Impact";
 import Experience from "../components/Experience";
 import Projects from "../components/Projects";
 import Menu from "../components/Menu";
-import Taskbar from "../components/Taskbar";
+import TaskbarDock from "../components/TaskbarDock";
 
 const Page = () => {
   const [screenWidth, setScreenWidth] = useState(null);
@@ -41,7 +41,7 @@ const Page = () => {
 
   return (
     <main
-      className="flex fixed flex-col h-full items-center justify-center bg-slate-950 homepage font-Rubik font-light"
+      className="flex fixed inset-0 flex-col w-full h-full items-center justify-center bg-slate-950 homepage font-Rubik font-light"
       pointerEvents="auto"
     >
       {visitorName && !isStartMenuOpen && (
@@ -69,7 +69,7 @@ const Page = () => {
         setInfo={setInfo}
         info={info}
       />
-      <Taskbar
+      <TaskbarDock
         isStartMenuOpen={isStartMenuOpen}
         setIsStartMenuOpen={setIsStartMenuOpen}
         screenWidth={screenWidth}

@@ -6,6 +6,7 @@ import { AiFillLinkedin } from "react-icons/ai";
 import { FaStickyNote } from "react-icons/fa";
 import { BsFillCloudFill } from "react-icons/bs";
 import Link from "next/link";
+import useWeather from "./useWeather";
 
 const Taskbar = ({
   screenWidth,
@@ -17,6 +18,7 @@ const Taskbar = ({
   setShowModal,
   screen,
 }) => {
+  const weather = useWeather();
   const [isStartMenuHovered, setIsStartMenuHovered] = useState(false);
   const [currentTime, setCurrentTime] = useState(new Date());
   const [isProjectsHovered, setIsProjectsHovered] = useState(false);
@@ -45,15 +47,37 @@ const Taskbar = ({
     <div className="flex items-center justify-center p-3 backdrop-blur-3xl space-x-6 w-screen">
       {screenWidth >= parseInt(639) && (
         <div className="basis-2/12 flex space-x-3">
-          <BsFillCloudFill className="text-4xl text-blue-500" />
-          <div className="flex flex-col">
-            <p className="text-white font-Rubik font-light">
-              27<sup>°</sup>C
-            </p>
-            <p className="text-white text-[13px] font-Rubik font-light">
-              Cloudy
-            </p>
-          </div>
+          {weather.status === "ready" ? (
+            <>
+              <weather.Icon
+                className="text-4xl text-blue-500"
+                aria-hidden="true"
+              />
+              <div className="flex flex-col">
+                <p className="text-white font-Rubik font-light">
+                  {weather.temperature}
+                  <sup>°</sup>C
+                </p>
+                <p className="text-white text-[13px] font-Rubik font-light">
+                  {weather.label}
+                </p>
+              </div>
+            </>
+          ) : (
+            <>
+              <BsFillCloudFill
+                className="text-4xl text-blue-500 opacity-50"
+                aria-hidden="true"
+              />
+              <div className="flex flex-col justify-center">
+                <p className="text-white text-[13px] font-Rubik font-light">
+                  {weather.status === "loading"
+                    ? "Loading weather…"
+                    : "Weather unavailable"}
+                </p>
+              </div>
+            </>
+          )}
         </div>
       )}
 

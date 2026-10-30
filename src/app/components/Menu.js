@@ -28,7 +28,7 @@ const Menu = ({
       }
     >
       {isStartMenuOpen && screen && (
-        <div className="flex  flex-col mt-auto bg-opacity-100 backdrop-blur-lg border border-gray-400 border-opacity-10 text-white rounded-2xl text-[13px] w-[450px] h-auto text-center smbelow:w-[95%]">
+        <div className="flex flex-col mt-auto mb-24 bg-slate-900 bg-opacity-70 backdrop-blur-lg border border-gray-400 border-opacity-10 text-white rounded-2xl text-[13px] w-[450px] h-auto text-center smbelow:w-[95%]">
           <div className="flex space-x-8 items-center justify-center smbelow:flex-wrap smbelow:item-start smbelow:space-x-2 smbelow:justify-evenly  p-5 ">
             {/*<div*/}
             {/*  className="flex flex-col items-center justify-center cursor-pointer"*/}
