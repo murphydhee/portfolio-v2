@@ -1,9 +1,33 @@
 import React, { useState } from "react";
 import AnimatedItem from "./AnimatedItem";
 import Modal from "./Modal";
+import ProjectsCanvas from "./ProjectsCanvas";
 import Image from "next/image";
 import { BsChevronLeft } from "react-icons/bs";
 import Link from "next/link";
+
+const canvasIconClasses =
+  "absolute flex flex-col items-center gap-1 w-24 text-center bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-2 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white hover:bg-opacity-40 transition";
+
+const CanvasProjectIcon = ({ x, y, image, imageProps, label, onClick }) => (
+  <button
+    type="button"
+    style={{ left: x, top: y }}
+    onPointerDown={(event) => event.stopPropagation()}
+    onClick={onClick}
+    className={canvasIconClasses}
+  >
+    <Image
+      src={image}
+      width={44}
+      height={44}
+      className="rounded-full"
+      alt={`${label} app icon`}
+      {...imageProps}
+    />
+    <p className="text-white text-xs leading-tight">{label}</p>
+  </button>
+);
 
 const BackButton = ({ onClick }) => (
   <button
@@ -285,212 +309,93 @@ const Projects = ({ showModal, setShowModal }) => {
             !chatto &&
             !heart &&
             !qr && (
-              <div className="flex flex-col w-full ">
-                <h1 className="text-4xl smbelow:text-2xl font-medium text-white border-b-2 pb-4 border-gray-400 border-opacity-10 w-full">
+              <div className="flex flex-col w-full">
+                <h1 className="text-4xl smbelow:text-2xl font-medium text-white border-b-2 pb-4 mb-4 border-gray-400 border-opacity-10 w-full">
                   Personal Projects
                 </h1>
-                <div className="flex mt-5 w-full smbelow:flex-col gap-2 ">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const audio = new Audio("click.wav");
-                      audio.play();
-                      setAeolus(true);
-                    }}
-                    className="basis-4/12 flex flex-col text-left bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-3 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                  >
-                    <div className="flex gap-3">
-                      <Image
-                        src="/aeolus.png"
-                        width={70}
-                        height={70}
-                        className="rounded-full"
-                        alt="Aeolus app icon"
-                      />
-                      <div className="flex flex-col">
-                        <p className="text-white text-xl">Aeolus</p>
-                        <p className="text-white text-base">Weather app</p>
-                        <p className="text-white text-[10px]">
-                          HTML, CSS, Javascript.
-                        </p>
-                      </div>
-                    </div>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const audio = new Audio("click.wav");
-                      audio.play();
-                      setScam(true);
-                    }}
-                    className="basis-4/12 flex flex-col text-left bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-3 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                  >
-                    <div className="flex gap-3">
-                      <Image
-                        src="/list.svg"
-                        width={20}
-                        height={5}
-                        alt="To Do List app icon"
-                      />
-                      <div className="flex flex-col">
-                        <p className="text-white text-xl">To Do List</p>
-                        <p className="text-white text-base">
-                          A simple To-do-list app
-                        </p>
-                        <p className="text-white text-[10px]">
-                          Vanilla JavaScript
-                        </p>
-                      </div>
-                    </div>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const audio = new Audio("click.wav");
-                      audio.play();
-                      setTrack(true);
-                    }}
-                    className="basis-4/12 flex flex-col text-left bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-3 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                  >
-                    <div className="flex gap-3">
-                      <Image
-                        src="/eyes.gif"
-                        width={70}
-                        height={5}
-                        alt="Anime Show Tracker app icon"
-                        unoptimized
-                      />
-                      <div className="flex flex-col">
-                        <p className="text-white text-xl">Anime Show Tracker</p>
-                        <p className="text-white text-base">
-                          Tracking Anime shows
-                        </p>
-                        <p className="text-white text-[10px]">
-                          Vue.JS, SASS, Nuxt
-                        </p>
-                      </div>
-                    </div>
-                  </button>
-                </div>
-
-                <div className="flex mt-5 w-full smbelow:flex-col gap-2">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const audio = new Audio("click.wav");
-                      audio.play();
-                      setVirtual(true);
-                    }}
-                    className="basis-4/12 flex flex-col text-left bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-3 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                  >
-                    <div className="flex gap-3">
-                      <Image
-                        src="/learn.svg"
-                        width={70}
-                        height={30}
-                        className="rounded-full"
-                        alt="Learning management system app icon"
-                      />
-                      <div className="flex flex-col">
-                        <p className="text-white text-xl">
-                          Learning management system
-                        </p>
-                        <p className="text-white text-base">Website</p>
-                        <p className="text-white text-[10px]">
-                          Vue.js, Sass, Nuxt
-                        </p>
-                      </div>
-                    </div>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const audio = new Audio("click.wav");
-                      audio.play();
-                      setChatto(true);
-                    }}
-                    className="basis-4/12 flex flex-col text-left bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-3 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                  >
-                    <div className="flex gap-3">
-                      <Image
-                        src="/chatto.png"
-                        width={65}
-                        height={40}
-                        alt="Chatto app icon"
-                        className="rounded-full"
-                      />
-                      <div className="flex flex-col">
-                        <p className="text-white text-xl">Chatto </p>
-                        <p className="text-white text-base">
-                          A Chat application using vue.js and ChatEngine.io
-                        </p>
-                        <p className="text-white text-[10px]">
-                          Vue.Js & ChatEngine.io
-                        </p>
-                      </div>
-                    </div>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const audio = new Audio("click.wav");
-                      audio.play();
-                      setHeart(true);
-                    }}
-                    className="basis-4/12 flex flex-col text-left bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-3 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                  >
-                    <div className="flex gap-3">
-                      <Image
-                        src="/disney.png"
-                        width={70}
-                        height={5}
-                        className="rounded-full"
-                        alt="Disney Plus clone app icon"
-                      />
-                      <div className="flex flex-col">
-                        <p className="text-white text-xl">Disney plus Clone</p>
-                        <p className="text-white text-base">Web App</p>
-                        <p className="text-white text-[10px]">
-                          React.JS, Redux & Firebase.
-                        </p>
-                      </div>
-                    </div>
-                  </button>
-                </div>
-
-                <div className="flex mt-5 w-full gap-2">
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const audio = new Audio("click.wav");
-                      audio.play();
-                      setQR(true);
-                    }}
-                    className="w-full flex flex-col text-left bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-3 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-                  >
-                    <div className="flex gap-3">
-                      <Image
-                        src="/qr.png"
-                        width={70}
-                        height={30}
-                        className="rounded-lg"
-                        alt="QR Code attendance system app icon"
-                      />
-                      <div className="flex flex-col">
-                        <p className="text-white text-xl">
-                          QR Code attendance system
-                        </p>
-                        <p className="text-white text-base">Web App</p>
-                        <p className="text-white text-[10px]">
-                          React.JS & Firebase.
-                        </p>
-                      </div>
-                    </div>
-                  </button>
+                <div className="w-full h-[460px] smbelow:h-[380px]">
+                  <ProjectsCanvas>
+                    <CanvasProjectIcon
+                      x={40}
+                      y={30}
+                      image="/aeolus.png"
+                      label="Aeolus"
+                      onClick={() => {
+                        const audio = new Audio("click.wav");
+                        audio.play();
+                        setAeolus(true);
+                      }}
+                    />
+                    <CanvasProjectIcon
+                      x={260}
+                      y={90}
+                      image="/list.svg"
+                      imageProps={{ className: "rounded-full bg-white p-2" }}
+                      label="To Do List"
+                      onClick={() => {
+                        const audio = new Audio("click.wav");
+                        audio.play();
+                        setScam(true);
+                      }}
+                    />
+                    <CanvasProjectIcon
+                      x={480}
+                      y={30}
+                      image="/eyes.gif"
+                      imageProps={{ unoptimized: true }}
+                      label="Anime Show Tracker"
+                      onClick={() => {
+                        const audio = new Audio("click.wav");
+                        audio.play();
+                        setTrack(true);
+                      }}
+                    />
+                    <CanvasProjectIcon
+                      x={700}
+                      y={110}
+                      image="/learn.svg"
+                      label="Learning management system"
+                      onClick={() => {
+                        const audio = new Audio("click.wav");
+                        audio.play();
+                        setVirtual(true);
+                      }}
+                    />
+                    <CanvasProjectIcon
+                      x={150}
+                      y={250}
+                      image="/chatto.png"
+                      label="Chatto"
+                      onClick={() => {
+                        const audio = new Audio("click.wav");
+                        audio.play();
+                        setChatto(true);
+                      }}
+                    />
+                    <CanvasProjectIcon
+                      x={400}
+                      y={290}
+                      image="/disney.png"
+                      label="Disney plus Clone"
+                      onClick={() => {
+                        const audio = new Audio("click.wav");
+                        audio.play();
+                        setHeart(true);
+                      }}
+                    />
+                    <CanvasProjectIcon
+                      x={630}
+                      y={260}
+                      image="/qr.png"
+                      imageProps={{ className: "rounded-lg" }}
+                      label="QR Code attendance system"
+                      onClick={() => {
+                        const audio = new Audio("click.wav");
+                        audio.play();
+                        setQR(true);
+                      }}
+                    />
+                  </ProjectsCanvas>
                 </div>
               </div>
             )}
