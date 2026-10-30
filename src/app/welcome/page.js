@@ -40,24 +40,21 @@ const Page = () => {
       animate={{ y: "0" }}
       transition={{ duration: 0.75, ease: "easeOut" }}
     >
-      <main className="relative flex flex-col h-screen items-center justify-center bg-slate-950 overflow-hidden">
+      <main className="relative flex flex-col h-screen w-full overflow-hidden">
+        {/* Full-bleed wallpaper, blurred like a lock screen */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute w-[500px] h-[500px] rounded-full bg-blue-500 opacity-20 blur-3xl"
+          className="absolute inset-0 bg-cover bg-center homepage"
         />
         <div
-          className={`relative flex flex-col items-center justify-center bg-slate-900 bg-opacity-60 backdrop-blur-2xl border border-gray-400 border-opacity-10 rounded-2xl shadow-2xl px-10 py-12 w-[420px] smbelow:w-[90%] transition ${
-            blur ? "backdrop-blur-md" : ""
+          aria-hidden="true"
+          className={`absolute inset-0 bg-black bg-opacity-40 backdrop-blur-lg transition ${
+            blur ? "backdrop-blur-xl" : ""
           }`}
-        >
-          <Image
-            src="/me.GIF"
-            width={360}
-            height={270}
-            className="mb-6 w-[120px] h-[120px] object-cover rounded-full ring-2 ring-white ring-opacity-20"
-            alt="Mfon Ekwere"
-            unoptimized
-          />
+        />
+
+        {/* Greeting, pinned near the top — like macOS's lock-screen clock */}
+        <div className="relative z-10 flex justify-center pt-20 smbelow:pt-12 px-5">
           <TypeAnimation
             sequence={[
               "こんにちは Kon'nichiwa 🇯🇵",
@@ -73,7 +70,19 @@ const Page = () => {
             wrapper="h1"
             speed={50}
             style={{ display: "inline-block", minHeight: "1.2em" }}
-            className="text-2xl text-white font-barriecito text-center mb-6"
+            className="text-3xl smbelow:text-2xl text-white font-barriecito text-center drop-shadow-lg"
+          />
+        </div>
+
+        {/* Avatar + sign-in, lower on the screen */}
+        <div className="relative z-10 flex-grow flex flex-col items-center justify-end pb-24 smbelow:pb-16 gap-4 px-5">
+          <Image
+            src="/me.GIF"
+            width={360}
+            height={270}
+            className="w-[140px] h-[140px] object-cover rounded-full ring-2 ring-white ring-opacity-30 shadow-2xl"
+            alt="Mfon Ekwere"
+            unoptimized
           />
           <label htmlFor="visitor-name" className="sr-only">
             Enter your name
@@ -81,7 +90,7 @@ const Page = () => {
           <input
             id="visitor-name"
             type="text"
-            className="border-gray-400 border-opacity-30 border-b-2 w-full rounded-md bg-black bg-opacity-30 p-2 text-white outline-none mb-5 focus-visible:ring-2 focus-visible:ring-white"
+            className="border-b-2 border-white border-opacity-30 w-[260px] text-center rounded-md bg-white bg-opacity-10 backdrop-blur-md p-2 text-white placeholder-white placeholder-opacity-70 outline-none focus-visible:ring-2 focus-visible:ring-white"
             placeholder="Enter your name"
             name="yourname"
             value={name}
@@ -92,7 +101,7 @@ const Page = () => {
           />
           <button
             type="button"
-            className="py-3 px-1 text-white rounded-md w-full bg-white bg-opacity-10 hover:bg-opacity-20 transition shadow-lg flex items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            className="py-2 px-6 text-white rounded-full bg-white bg-opacity-10 hover:bg-opacity-20 transition shadow-lg flex items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             onClick={proceed}
             disabled={loading}
           >
