@@ -1,5 +1,26 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+const WINS_STORAGE_KEY = "ticTacToeMurphyWins";
+
+const readStoredWins = () => {
+  try {
+    const raw = localStorage.getItem(WINS_STORAGE_KEY);
+    const parsed = raw ? parseInt(raw, 10) : 0;
+    return Number.isFinite(parsed) ? parsed : 0;
+  } catch {
+    return 0;
+  }
+};
+
+const writeStoredWins = (wins) => {
+  try {
+    localStorage.setItem(WINS_STORAGE_KEY, String(wins));
+  } catch {
+    // Storage can fail (quota, private mode) — the count just won't
+    // persist this time.
+  }
+};
 
 const LINES = [
   [0, 1, 2],
@@ -59,12 +80,24 @@ const TicTacToeGame = () => {
   const [message, setMessage] = useState("");
   const [winLine, setWinLine] = useState(null);
 
+  useEffect(() => {
+    setScore((s) => ({ ...s, murphy: readStoredWins() }));
+  }, []);
+
+  const recordMurphyWin = () => {
+    setScore((s) => {
+      const murphy = s.murphy + 1;
+      writeStoredWins(murphy);
+      return { ...s, murphy };
+    });
+  };
+
   const triggerVarWin = () => {
     setStatus("var-review");
     setMessage("VAR is reviewing...");
     setTimeout(() => {
       setMessage("VAR says O. Murphy wins!");
-      setScore((s) => ({ ...s, murphy: s.murphy + 1 }));
+      recordMurphyWin();
       setStatus("over");
     }, 1200);
   };
@@ -90,7 +123,7 @@ const TicTacToeGame = () => {
     const aiResult = calculateWinner(afterAi);
     if (aiResult) {
       setWinLine(aiResult.line);
-      setScore((s) => ({ ...s, murphy: s.murphy + 1 }));
+      recordMurphyWin();
       setMessage("Murphy wins!");
       setStatus("over");
       return;
@@ -109,11 +142,11 @@ const TicTacToeGame = () => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-4 text-white">
-      <p className="font-Rubik text-sm text-gray-300">
+    <div className="flex flex-col items-center gap-5 text-white">
+      <p className="font-Rubik text-base text-gray-300">
         You {score.you} — {score.murphy} Murphy
       </p>
-      <div className="grid grid-cols-3 gap-2">
+      <div className="grid grid-cols-3 gap-3">
         {cells.map((cell, index) => (
           <button
             key={index}
@@ -121,7 +154,7 @@ const TicTacToeGame = () => {
             disabled={status !== "playing" || Boolean(cell)}
             onClick={() => handleCellClick(index)}
             aria-label={cell ? `Cell ${index + 1}: ${cell}` : `Cell ${index + 1}, empty`}
-            className={`w-20 h-20 flex items-center justify-center text-4xl font-medium rounded-lg bg-black bg-opacity-30 border-2 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
+            className={`w-28 h-28 flex items-center justify-center text-5xl font-medium rounded-xl bg-black bg-opacity-30 border-2 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
               winLine && winLine.includes(index)
                 ? "border-blue-400"
                 : "border-gray-400 border-opacity-10"
@@ -129,12 +162,12 @@ const TicTacToeGame = () => {
           >
             {cell === "X" && <span>✕</span>}
             {cell === "O" && (
-              <span className="rounded-full border-4 border-white w-10 h-10 block" />
+              <span className="rounded-full border-4 border-white w-14 h-14 block" />
             )}
           </button>
         ))}
       </div>
-      {message && <p className="text-sm text-gray-300 font-Rubik">{message}</p>}
+      {message && <p className="text-base text-gray-300 font-Rubik">{message}</p>}
       {status === "over" && (
         <button
           type="button"
@@ -142,7 +175,7 @@ const TicTacToeGame = () => {
             playClick();
             playAgain();
           }}
-          className="py-2 px-5 rounded-full bg-white bg-opacity-10 hover:bg-opacity-20 transition text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          className="py-2 px-6 rounded-full bg-white bg-opacity-10 hover:bg-opacity-20 transition text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >
           Try again
         </button>

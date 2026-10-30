@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import MacWindowChrome from "./MacWindowChrome";
 import { FiPlus, FiMinus } from "react-icons/fi";
@@ -13,8 +13,17 @@ const CELL_W = 140;
 const CELL_H = 150;
 const TILE_W = COLS * CELL_W;
 const TILE_H = ROWS * CELL_H;
-const REPEAT = 3; // a 3x3 arrangement of the grid — generous room to pan
-// around before hitting an edge, standing in for a true infinite tile.
+const REPEAT = 7; // tiles rendered around the center one, wide enough to
+// cover the viewport at every zoom level once the pan offset is wrapped.
+
+// Wraps a pan offset into [-size/2, size/2). Since the tiled grid repeats
+// identically every `size` pixels, snapping the offset back by one tile is
+// visually invisible — this is what makes the pan feel infinite with no
+// edge and no visible seam.
+const wrap = (value, size) => {
+  const half = size / 2;
+  return (((value + half) % size) + size) % size - half;
+};
 
 const REAL_PROJECTS = [
   {
@@ -132,8 +141,6 @@ const ProjectIcon = ({ project, style }) => {
 
 const ProjectsWindow = ({ isOpen, onClose }) => {
   const [transform, setTransform] = useState({ x: 0, y: 0, scale: 1 });
-  const isPanning = useRef(false);
-  const lastPoint = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     if (!isOpen) return;
@@ -146,34 +153,24 @@ const ProjectsWindow = ({ isOpen, onClose }) => {
 
   if (!isOpen) return null;
 
-  const half = (REPEAT - 1) / 2;
-  const maxX = TILE_W * half;
-  const maxY = TILE_H * half;
-
-  const handlePointerDown = (event) => {
-    isPanning.current = true;
-    lastPoint.current = { x: event.clientX, y: event.clientY };
-  };
-  const handlePointerMove = (event) => {
-    if (!isPanning.current) return;
-    const dx = event.clientX - lastPoint.current.x;
-    const dy = event.clientY - lastPoint.current.y;
-    lastPoint.current = { x: event.clientX, y: event.clientY };
-    setTransform((t) => ({
-      ...t,
-      x: Math.min(maxX, Math.max(-maxX, t.x + dx)),
-      y: Math.min(maxY, Math.max(-maxY, t.y + dy)),
-    }));
-  };
-  const stopPanning = () => {
-    isPanning.current = false;
-  };
   const handleWheel = (event) => {
     event.preventDefault();
-    const delta = -event.deltaY * 0.001;
+
+    // Hold ctrl/cmd (the standard trackpad "pinch to zoom" modifier, and
+    // ctrl+wheel on a mouse) to zoom; a plain scroll pans the grid instead.
+    if (event.ctrlKey || event.metaKey) {
+      const delta = -event.deltaY * 0.001;
+      setTransform((t) => ({
+        ...t,
+        scale: Math.min(MAX_SCALE, Math.max(MIN_SCALE, t.scale + delta)),
+      }));
+      return;
+    }
+
     setTransform((t) => ({
       ...t,
-      scale: Math.min(MAX_SCALE, Math.max(MIN_SCALE, t.scale + delta)),
+      x: wrap(t.x - event.deltaX, TILE_W),
+      y: wrap(t.y - event.deltaY, TILE_H),
     }));
   };
   const zoomBy = (delta) => {
@@ -210,11 +207,7 @@ const ProjectsWindow = ({ isOpen, onClose }) => {
     <div className="fixed inset-0 z-50 flex flex-col bg-slate-950">
       <MacWindowChrome title="Projects" onClose={onClose} />
       <div
-        className="relative flex-grow overflow-hidden touch-none select-none cursor-grab active:cursor-grabbing"
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={stopPanning}
-        onPointerLeave={stopPanning}
+        className="relative flex-grow overflow-hidden touch-none select-none"
         onWheel={handleWheel}
       >
         <div
@@ -259,7 +252,7 @@ const ProjectsWindow = ({ isOpen, onClose }) => {
         </div>
 
         <p className="absolute top-4 left-4 text-white text-opacity-40 text-xs">
-          Drag to pan · scroll to zoom
+          Scroll to pan · ⌘/Ctrl + scroll to zoom
         </p>
       </div>
     </div>
