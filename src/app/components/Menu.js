@@ -6,6 +6,7 @@ import { FcCollaboration } from "react-icons/fc";
 import { BiChevronUp } from "react-icons/bi";
 import { BiChevronDown } from "react-icons/bi";
 import { FcFolder } from "react-icons/fc";
+import { GiPawPrint } from "react-icons/gi";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -18,6 +19,7 @@ const Menu = ({
   setEducation,
   setInfo,
   info,
+  setPetPickerOpen,
 }) => {
   return (
     <div
@@ -103,6 +105,21 @@ const Menu = ({
                 aria-hidden="true"
               />
               <p className="text-center smbelow:hidden">Education</p>
+            </button>
+            <button
+              type="button"
+              className="flex flex-col items-center justify-center rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              onClick={() => {
+                const audio = new Audio("click.wav");
+                audio.play();
+                setPetPickerOpen(true);
+              }}
+            >
+              <GiPawPrint
+                className="text-5xl text-amber-400 smbelow:text-4xl"
+                aria-hidden="true"
+              />
+              <p className="text-center smbelow:hidden">Pet</p>
             </button>
           </div>
 

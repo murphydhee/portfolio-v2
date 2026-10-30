@@ -26,7 +26,6 @@ const TaskbarDock = ({ isStartMenuOpen, ...taskbarProps }) => {
         className="absolute bottom-1 h-1 w-16 rounded-full bg-white bg-opacity-40"
       />
       <m.div
-        className="w-full"
         animate={{ y: isVisible ? "0%" : "100%" }}
         transition={{ duration: 0.25, ease: "easeInOut" }}
       >
