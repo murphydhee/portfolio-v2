@@ -1,9 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import { motion as m, useClient } from "framer-motion"; // Import useClient
+import { motion as m } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { BiLoaderAlt } from "react-icons/bi";
+import { TypeAnimation } from "react-type-animation";
 
 const Page = () => {
   const router = useRouter();
@@ -12,11 +13,7 @@ const Page = () => {
   const [loading, setLoading] = useState(false);
 
   const nameHandler = (event) => {
-    const { name, value } = event.target;
-    setName((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    setName(event.target.value);
   };
 
   const onInputClick = () => {
@@ -56,31 +53,53 @@ const Page = () => {
             width={200}
             height={200}
             className="mb-6 rounded-full"
-            alt=""
+            alt="Mfon Ekwere"
+            unoptimized
           />
-          <h1 className="text-4xl text-white font-barriecito">Welcome</h1>
-          <p className="text-base text-white font-Rajdhani mb-4">
-            Please enter your name
-          </p>
+          <TypeAnimation
+            sequence={[
+              "こんにちは Kon'nichiwa 🇯🇵",
+              900,
+              "Hola 🇪🇸",
+              900,
+              "Hello! 👋🏾",
+              900,
+              "How far! 👋🏾🇳🇬",
+              900,
+              "Welcome! What's your name?",
+            ]}
+            wrapper="h1"
+            speed={50}
+            style={{ display: "inline-block" }}
+            className="text-4xl text-white font-barriecito text-center mb-4"
+          />
+          <label htmlFor="visitor-name" className="sr-only">
+            Enter your name
+          </label>
           <input
+            id="visitor-name"
             type="text"
-            className="border-gray-400 border-b-2 w-[300px] rounded-md bg-gray-950 p-2 text-white outline-none mb-5"
+            className="border-gray-400 border-b-2 w-[300px] rounded-md bg-gray-950 p-2 text-white outline-none mb-5 focus-visible:ring-2 focus-visible:ring-white"
             placeholder="Enter your name"
             name="yourname"
-            autoComplete="false"
-            autoSave="false"
+            value={name}
+            autoComplete="off"
             onChange={nameHandler}
             onBlur={handleBlur}
             onClick={onInputClick}
           />
           <button
-            className="py-3 px-1 text-white rounded-md w-[150px] backdrop-blur-2xl shadow-lg flex items-center justify-center"
+            type="button"
+            className="py-3 px-1 text-white rounded-md w-[150px] bg-white bg-opacity-20 backdrop-blur-2xl shadow-lg flex items-center justify-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             onClick={proceed}
             disabled={loading}
           >
             {loading ? (
               <div className="flex items-center">
-                <BiLoaderAlt className="animate-spin mr-2 text-2xl" />
+                <BiLoaderAlt
+                  className="animate-spin mr-2 text-2xl"
+                  aria-hidden="true"
+                />
                 Please Wait...
               </div>
             ) : (

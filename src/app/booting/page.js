@@ -60,7 +60,9 @@ export default function Home() {
             width={900}
             height={900}
             className="mb-10"
-            alt="Attack on Titan"
+            alt="Attack on Titan animation"
+            unoptimized
+            priority
           />
           {/*<ImSpinner8 className="animate-spin text-3xl text-white" />*/}
         </div>

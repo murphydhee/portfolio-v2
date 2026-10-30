@@ -58,11 +58,14 @@ const Taskbar = ({
       )}
 
       <div className="basis-8/12 flex items-center justify-center space-x-5 ">
-        <div
+        <button
+          type="button"
+          aria-label="Start menu"
+          aria-expanded={isStartMenuOpen}
           className={
             isStartMenuOpen
-              ? "p-1 rounded-md relative transition duration-100 hover:shadow-xl hover:bg-slate-900 hover:bg-opacity-50 hover:cursor-pointer hover:backdrop-blur-lg bg-slate-900"
-              : "p-1 rounded-md relative transition duration-100 hover:shadow-xl hover:bg-slate-900 hover:bg-opacity-50 hover:cursor-pointer hover:backdrop-blur-lg "
+              ? "p-1 rounded-md relative transition duration-100 hover:shadow-xl hover:bg-slate-900 hover:bg-opacity-50 hover:backdrop-blur-lg bg-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+              : "p-1 rounded-md relative transition duration-100 hover:shadow-xl hover:bg-slate-900 hover:bg-opacity-50 hover:backdrop-blur-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           }
           onMouseEnter={() => setIsStartMenuHovered(true)}
           onMouseLeave={() => setIsStartMenuHovered(false)}
@@ -74,16 +77,18 @@ const Taskbar = ({
             setIsStartMenuOpen(!isStartMenuOpen);
           }}
         >
-          <MdWindow className="text-4xl text-blue-500" />
+          <MdWindow className="text-4xl text-blue-500" aria-hidden="true" />
 
           {isStartMenuHovered && !isStartMenuOpen && (
             <span className="bg-black text-white p-2 rounded-md absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 text-[13px] w-[100px] text-center">
               Start Menu
             </span>
           )}
-        </div>
-        <div
-          className="p-1 rounded-md relative transition duration-100 hover:shadow-xl hover:bg-slate-900 hover:bg-opacity-50 hover:cursor-pointer hover:backdrop-blur-lg "
+        </button>
+        <button
+          type="button"
+          aria-label="Open projects"
+          className="p-1 rounded-md relative transition duration-100 hover:shadow-xl hover:bg-slate-900 hover:bg-opacity-50 hover:backdrop-blur-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           onMouseEnter={() => setIsProjectsHovered(true)}
           onMouseLeave={() => setIsProjectsHovered(false)}
           onClick={() => {
@@ -92,27 +97,32 @@ const Taskbar = ({
             setShowModal(true);
           }}
         >
-          <FcFolder className="text-4xl" />
+          <FcFolder className="text-4xl" aria-hidden="true" />
           {isProjectsHovered && (
             <span className="bg-black text-white p-2 rounded-md absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 text-[13px] w-[100px] text-center">
               Projects
             </span>
           )}
-        </div>
+        </button>
         <Link
           href="https://github.com/murphydhee"
+          aria-label="GitHub profile (opens in a new tab)"
           onClick={() => {
             const audio = new Audio("click.wav");
             audio.play();
           }}
           target="_blank"
+          className="rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >
           <div
-            className="p-1 rounded-md relative transition duration-100 hover:shadow-xl hover:bg-slate-900 hover:bg-opacity-50 hover:cursor-pointer hover:backdrop-blur-lg "
+            className="p-1 rounded-md relative transition duration-100 hover:shadow-xl hover:bg-slate-900 hover:bg-opacity-50 hover:backdrop-blur-lg "
             onMouseEnter={() => setIsGithubHovered(true)}
             onMouseLeave={() => setIsGithubHovered(false)}
           >
-            <VscGithubInverted className="text-[33px] text-gray-400" />
+            <VscGithubInverted
+              className="text-[33px] text-gray-400"
+              aria-hidden="true"
+            />
             {isGithubHovered && (
               <span className="bg-black text-white p-2 rounded-md absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 text-[13px] w-[100px] text-center">
                 Github
@@ -123,17 +133,22 @@ const Taskbar = ({
         <Link
           href="https://www.linkedin.com/in/mfon-ekwere/"
           target="_blank"
+          aria-label="LinkedIn profile (opens in a new tab)"
           onClick={() => {
             const audio = new Audio("click.wav");
             audio.play();
           }}
+          className="rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >
           <div
-            className="p-1 rounded-md relative transition duration-100 hover:shadow-xl hover:bg-slate-900 hover:bg-opacity-50 hover:cursor-pointer hover:backdrop-blur-lg "
+            className="p-1 rounded-md relative transition duration-100 hover:shadow-xl hover:bg-slate-900 hover:bg-opacity-50 hover:backdrop-blur-lg "
             onMouseEnter={() => setIsLinkedInHovered(true)}
             onMouseLeave={() => setIsLinkedInHovered(false)}
           >
-            <AiFillLinkedin className="text-[40px] text-[#0A66C2]" />
+            <AiFillLinkedin
+              className="text-[40px] text-[#0A66C2]"
+              aria-hidden="true"
+            />
             {isLinkedInHovered && (
               <span className="bg-black text-white p-2 rounded-md absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 text-[13px] w-[100px] text-center">
                 LinkedIn
@@ -144,17 +159,22 @@ const Taskbar = ({
         <Link
           href="https://murphydhee.hashnode.dev/"
           target="_blank"
+          aria-label="Articles (opens in a new tab)"
           onClick={() => {
             const audio = new Audio("click.wav");
             audio.play();
           }}
+          className="rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >
           <div
-            className="p-1 rounded-md relative transition duration-100 hover:shadow-xl hover:bg-slate-900 hover:bg-opacity-50 hover:cursor-pointer hover:backdrop-blur-lg "
+            className="p-1 rounded-md relative transition duration-100 hover:shadow-xl hover:bg-slate-900 hover:bg-opacity-50 hover:backdrop-blur-lg "
             onMouseEnter={() => setisArticlesHovered(true)}
             onMouseLeave={() => setisArticlesHovered(false)}
           >
-            <FaStickyNote className="text-[36px] text-[#00acee]" />
+            <FaStickyNote
+              className="text-[36px] text-[#00acee]"
+              aria-hidden="true"
+            />
             {isArticlesHovered && (
               <span className="bg-black text-white p-2 rounded-md absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 text-[13px] w-[100px] text-center">
                 Articles

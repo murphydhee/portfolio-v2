@@ -1,28 +1,15 @@
 import React from "react";
 import AnimatedItem from "./AnimatedItem";
-import { MdOutlineClose } from "react-icons/md";
+import Modal from "./Modal";
 
 const Experience = ({ experience, setexperience }) => {
   return (
-    <div
-      className={`fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-black bg-opacity-50 transition-opacity ${
-        experience ? "opacity-100 visible" : "opacity-0 invisible"
-      }`}
+    <Modal
+      isOpen={experience}
+      onClose={() => setexperience(false)}
+      className="w-[1000px] h-[500px] overflow-y-scroll smbelow:w-[95%]"
     >
-      <div className="bg-opacity-100 backdrop-blur-3xl border border-gray-400  w-[1000px] h-[500px] overflow-y-scroll p-1 rounded-lg shadow-xl  border-opacity-10">
-        <div className="flex">
-          <MdOutlineClose
-            className="text-white text-4xl ml-auto p-1  hover:bg-red-600 rounded-tr-md rounded-br-md"
-            onClick={() => {
-              const audio = new Audio("click.wav");
-              audio.play();
-              setexperience(false);
-            }}
-          />
-        </div>
-
-        <div className="flex flex-col items-start justify-start p-5">
-          <AnimatedItem animationConfig={{ delay: 0.1 }}>
+      <AnimatedItem animationConfig={{ delay: 0.1 }}>
             <div className="flex flex-col w-full">
               <h1 className="text-4xl font-medium text-white border-b-2 pb-2 mb-4 border-gray-400 border-opacity-10 w-full">
                 Experience
@@ -108,10 +95,8 @@ const Experience = ({ experience, setexperience }) => {
                 </div>
               </section>
             </div>
-          </AnimatedItem>
-        </div>
-      </div>
-    </div>
+      </AnimatedItem>
+    </Modal>
   );
 };
 

@@ -11,6 +11,7 @@ import Taskbar from "../components/Taskbar";
 
 const Page = () => {
   const [screenWidth, setScreenWidth] = useState(null);
+  const [visitorName, setVisitorName] = useState("");
 
   const [showModal, setShowModal] = useState(false);
   const [experience, setexperience] = useState(false);
@@ -33,11 +34,21 @@ const Page = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const storedName = localStorage.getItem("name");
+    if (storedName) setVisitorName(storedName);
+  }, []);
+
   return (
     <main
       className="flex fixed flex-col h-full items-center justify-center bg-slate-950 homepage font-Rubik font-light"
       pointerEvents="auto"
     >
+      {visitorName && !isStartMenuOpen && (
+        <p className="absolute top-4 right-4 text-white text-sm bg-black bg-opacity-30 backdrop-blur-md px-3 py-1 rounded-full z-10">
+          Welcome back, {visitorName} 👋
+        </p>
+      )}
       <DesktopItems
         isStartMenuOpen={isStartMenuOpen}
         setShowModal={setShowModal}

@@ -1,9 +1,20 @@
 import React, { useState } from "react";
 import AnimatedItem from "./AnimatedItem";
-import { MdOutlineClose } from "react-icons/md";
+import Modal from "./Modal";
 import Image from "next/image";
 import { BsChevronLeft } from "react-icons/bs";
 import Link from "next/link";
+
+const BackButton = ({ onClick }) => (
+  <button
+    type="button"
+    aria-label="Back to projects list"
+    className="text-white mb-4 text-lg rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+    onClick={onClick}
+  >
+    <BsChevronLeft aria-hidden="true" />
+  </button>
+);
 
 const Projects = ({ showModal, setShowModal }) => {
   const [aeolus, setAeolus] = useState(false);
@@ -14,28 +25,14 @@ const Projects = ({ showModal, setShowModal }) => {
   const [heart, setHeart] = useState(false);
   const [qr, setQR] = useState(false);
   return (
-    <div
-      className={`fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-black bg-opacity-50 transition-opacity ${
-        showModal ? "opacity-100 visible" : "opacity-0 invisible"
-      }`}
+    <Modal
+      isOpen={showModal}
+      onClose={() => setShowModal(false)}
+      className="w-[1000px] h-auto smbelow:h-[600px] smbelow:overflow-y-auto smbelow:mt-5 smbelow:w-[95%]"
     >
-      <div className="bg-opacity-100 backdrop-blur-3xl border border-gray-400  w-[1000px]  smbelow:h-[600px]  smbelow:overflow-y-auto smbelow:mt-5 h-auto p-1 rounded-lg shadow-xl  border-opacity-10 ">
-        <div className="flex">
-          <MdOutlineClose
-            className="text-white text-4xl ml-auto p-1  hover:bg-red-600 rounded-tr-md rounded-br-md"
-            onClick={() => {
-              const audio = new Audio("click.wav");
-              audio.play();
-              setShowModal(false);
-            }}
-          />
-        </div>
-
-        <div className="flex flex-col items-start justify-start p-5">
-          {aeolus && (
+      {aeolus && (
             <AnimatedItem animationConfig={{ delay: 0.1 }}>
-              <BsChevronLeft
-                className="text-white mb-4 text-lg cursor-pointer"
+              <BackButton
                 onClick={() => {
                   const audio = new Audio("click.wav");
                   audio.play();
@@ -83,8 +80,7 @@ const Projects = ({ showModal, setShowModal }) => {
 
           {scam && (
             <AnimatedItem animationConfig={{ delay: 0.1 }}>
-              <BsChevronLeft
-                className="text-white mb-4 text-lg cursor-pointer"
+              <BackButton
                 onClick={() => {
                   const audio = new Audio("click.wav");
                   audio.play();
@@ -118,8 +114,7 @@ const Projects = ({ showModal, setShowModal }) => {
 
           {track && (
             <AnimatedItem animationConfig={{ delay: 0.1 }}>
-              <BsChevronLeft
-                className="text-white mb-4 text-lg cursor-pointer"
+              <BackButton
                 onClick={() => {
                   const audio = new Audio("click.wav");
                   audio.play();
@@ -149,8 +144,7 @@ const Projects = ({ showModal, setShowModal }) => {
 
           {virtual && (
             <AnimatedItem animationConfig={{ delay: 0.1 }}>
-              <BsChevronLeft
-                className="text-white mb-4 text-lg cursor-pointer"
+              <BackButton
                 onClick={() => {
                   const audio = new Audio("click.wav");
                   audio.play();
@@ -191,8 +185,7 @@ const Projects = ({ showModal, setShowModal }) => {
 
           {chatto && (
             <AnimatedItem animationConfig={{ delay: 0.1 }}>
-              <BsChevronLeft
-                className="text-white mb-4 text-lg cursor-pointer"
+              <BackButton
                 onClick={() => {
                   const audio = new Audio("click.wav");
                   audio.play();
@@ -220,8 +213,7 @@ const Projects = ({ showModal, setShowModal }) => {
 
           {heart && (
             <AnimatedItem animationConfig={{ delay: 0.1 }}>
-              <BsChevronLeft
-                className="text-white mb-4 text-lg cursor-pointer"
+              <BackButton
                 onClick={() => {
                   const audio = new Audio("click.wav");
                   audio.play();
@@ -257,8 +249,7 @@ const Projects = ({ showModal, setShowModal }) => {
 
           {qr && (
             <AnimatedItem animationConfig={{ delay: 0.1 }}>
-              <BsChevronLeft
-                className="text-white mb-4 text-lg cursor-pointer"
+              <BackButton
                 onClick={() => {
                   const audio = new Audio("click.wav");
                   audio.play();
@@ -299,13 +290,14 @@ const Projects = ({ showModal, setShowModal }) => {
                   Personal Projects
                 </h1>
                 <div className="flex mt-5 w-full smbelow:flex-col gap-2 ">
-                  <div
+                  <button
+                    type="button"
                     onClick={() => {
                       const audio = new Audio("click.wav");
                       audio.play();
                       setAeolus(true);
                     }}
-                    className="basis-4/12 flex flex-col cursor-pointer bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-3 rounded-xl "
+                    className="basis-4/12 flex flex-col text-left bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-3 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                   >
                     <div className="flex gap-3">
                       <Image
@@ -313,7 +305,7 @@ const Projects = ({ showModal, setShowModal }) => {
                         width={70}
                         height={70}
                         className="rounded-full"
-                        alt="Aeoulus"
+                        alt="Aeolus app icon"
                       />
                       <div className="flex flex-col">
                         <p className="text-white text-xl">Aeolus</p>
@@ -323,22 +315,23 @@ const Projects = ({ showModal, setShowModal }) => {
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </button>
 
-                  <div
+                  <button
+                    type="button"
                     onClick={() => {
                       const audio = new Audio("click.wav");
                       audio.play();
                       setScam(true);
                     }}
-                    className="basis-4/12 flex flex-col cursor-pointer bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-3 rounded-xl "
+                    className="basis-4/12 flex flex-col text-left bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-3 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                   >
                     <div className="flex gap-3">
                       <Image
                         src="/list.svg"
                         width={20}
                         height={5}
-                        alt="List logo"
+                        alt="To Do List app icon"
                       />
                       <div className="flex flex-col">
                         <p className="text-white text-xl">To Do List</p>
@@ -350,18 +343,25 @@ const Projects = ({ showModal, setShowModal }) => {
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </button>
 
-                  <div
+                  <button
+                    type="button"
                     onClick={() => {
                       const audio = new Audio("click.wav");
                       audio.play();
                       setTrack(true);
                     }}
-                    className="basis-4/12 flex flex-col cursor-pointer bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-3 rounded-xl "
+                    className="basis-4/12 flex flex-col text-left bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-3 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                   >
                     <div className="flex gap-3">
-                      <Image src="/eyes.gif" width={70} height={5} alt="" />
+                      <Image
+                        src="/eyes.gif"
+                        width={70}
+                        height={5}
+                        alt="Anime Show Tracker app icon"
+                        unoptimized
+                      />
                       <div className="flex flex-col">
                         <p className="text-white text-xl">Anime Show Tracker</p>
                         <p className="text-white text-base">
@@ -372,17 +372,18 @@ const Projects = ({ showModal, setShowModal }) => {
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </button>
                 </div>
 
                 <div className="flex mt-5 w-full smbelow:flex-col gap-2">
-                  <div
+                  <button
+                    type="button"
                     onClick={() => {
                       const audio = new Audio("click.wav");
                       audio.play();
                       setVirtual(true);
                     }}
-                    className="basis-4/12 flex flex-col cursor-pointer  bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-3 rounded-xl "
+                    className="basis-4/12 flex flex-col text-left bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-3 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                   >
                     <div className="flex gap-3">
                       <Image
@@ -390,7 +391,7 @@ const Projects = ({ showModal, setShowModal }) => {
                         width={70}
                         height={30}
                         className="rounded-full"
-                        alt=""
+                        alt="Learning management system app icon"
                       />
                       <div className="flex flex-col">
                         <p className="text-white text-xl">
@@ -402,22 +403,23 @@ const Projects = ({ showModal, setShowModal }) => {
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </button>
 
-                  <div
+                  <button
+                    type="button"
                     onClick={() => {
                       const audio = new Audio("click.wav");
                       audio.play();
                       setChatto(true);
                     }}
-                    className="basis-4/12 flex flex-col cursor-pointer bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-3 rounded-xl "
+                    className="basis-4/12 flex flex-col text-left bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-3 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                   >
                     <div className="flex gap-3">
                       <Image
                         src="/chatto.png"
                         width={65}
                         height={40}
-                        alt=""
+                        alt="Chatto app icon"
                         className="rounded-full"
                       />
                       <div className="flex flex-col">
@@ -430,15 +432,16 @@ const Projects = ({ showModal, setShowModal }) => {
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </button>
 
-                  <div
+                  <button
+                    type="button"
                     onClick={() => {
                       const audio = new Audio("click.wav");
                       audio.play();
                       setHeart(true);
                     }}
-                    className="basis-4/12 cursor-pointer flex flex-col bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-3 rounded-xl "
+                    className="basis-4/12 flex flex-col text-left bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-3 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                   >
                     <div className="flex gap-3">
                       <Image
@@ -446,7 +449,7 @@ const Projects = ({ showModal, setShowModal }) => {
                         width={70}
                         height={5}
                         className="rounded-full"
-                        alt=""
+                        alt="Disney Plus clone app icon"
                       />
                       <div className="flex flex-col">
                         <p className="text-white text-xl">Disney plus Clone</p>
@@ -456,17 +459,18 @@ const Projects = ({ showModal, setShowModal }) => {
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </button>
                 </div>
 
                 <div className="flex mt-5 w-full gap-2">
-                  <div
+                  <button
+                    type="button"
                     onClick={() => {
                       const audio = new Audio("click.wav");
                       audio.play();
                       setQR(true);
                     }}
-                    className="w-full flex flex-col  cursor-pointer bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-3 rounded-xl "
+                    className="w-full flex flex-col text-left bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-3 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                   >
                     <div className="flex gap-3">
                       <Image
@@ -474,7 +478,7 @@ const Projects = ({ showModal, setShowModal }) => {
                         width={70}
                         height={30}
                         className="rounded-lg"
-                        alt="QR image"
+                        alt="QR Code attendance system app icon"
                       />
                       <div className="flex flex-col">
                         <p className="text-white text-xl">
@@ -486,13 +490,11 @@ const Projects = ({ showModal, setShowModal }) => {
                         </p>
                       </div>
                     </div>
-                  </div>
+                  </button>
                 </div>
               </div>
             )}
-        </div>
-      </div>
-    </div>
+    </Modal>
   );
 };
 

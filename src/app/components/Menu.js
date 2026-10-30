@@ -44,49 +44,66 @@ const Menu = ({
             <Link
               href="https://docs.google.com/document/d/1KOvz-VVwrqxER2cPQxNk5z1gsDOi0WrXTLU2fZA3amE/edit?usp=sharing"
               target="_blank"
+              aria-label="Open resume (opens in a new tab)"
               onClick={() => {
                 const audio = new Audio("click.wav");
                 audio.play();
               }}
+              className="rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               <div className="flex flex-col items-center justify-center">
-                <BiSolidFilePdf className="text-5xl text-red-600 smbelow:text-4xl" />
+                <BiSolidFilePdf
+                  className="text-5xl text-red-600 smbelow:text-4xl"
+                  aria-hidden="true"
+                />
                 <p className="text-center smbelow:hidden">Resume</p>
               </div>
             </Link>
-            <div
-              className="flex flex-col items-center justify-center"
+            <button
+              type="button"
+              className="flex flex-col items-center justify-center rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               onClick={() => {
                 const audio = new Audio("click.wav");
                 audio.play();
                 setexperience(true);
               }}
             >
-              <FcCollaboration className="text-5xl cursor-pointer smbelow:text-4xl" />
+              <FcCollaboration
+                className="text-5xl smbelow:text-4xl"
+                aria-hidden="true"
+              />
               <p className="text-center smbelow:hidden">Experience</p>
-            </div>
-            <div
-              className="flex flex-col items-center justify-center"
+            </button>
+            <button
+              type="button"
+              className="flex flex-col items-center justify-center rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               onClick={() => {
                 const audio = new Audio("click.wav");
                 audio.play();
                 setImpact(true);
               }}
             >
-              <FcBullish className="text-5xl cursor-pointer smbelow:text-4xl" />
+              <FcBullish
+                className="text-5xl smbelow:text-4xl"
+                aria-hidden="true"
+              />
               <p className="text-center smbelow:hidden">Impact</p>
-            </div>
-            <div
-              className="flex flex-col items-center justify-center"
+            </button>
+            <button
+              type="button"
+              className="flex flex-col items-center justify-center rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               onClick={() => {
                 const audio = new Audio("click.wav");
                 audio.play();
                 setEducation(true);
               }}
             >
-              <FcGraduationCap className="text-5xl cursor-pointer smbelow:text-4xl" />
+              <FcGraduationCap
+                className="text-5xl smbelow:text-4xl"
+                aria-hidden="true"
+              />
               <p className="text-center smbelow:hidden">Education</p>
-            </div>
+            </button>
           </div>
 
           {info && (
@@ -131,25 +148,23 @@ const Menu = ({
               <p className="text-white text-[11px]">Frontend Developer</p>
             </div>
             <div className="ml-auto">
-              {info ? (
-                <BiChevronDown
-                  className="text-3xl cursor-pointer"
-                  onClick={() => {
-                    const audio = new Audio("click.wav");
-                    audio.play();
-                    setInfo(!info);
-                  }}
-                />
-              ) : (
-                <BiChevronUp
-                  className="text-3xl cursor-pointer"
-                  onClick={() => {
-                    const audio = new Audio("click.wav");
-                    audio.play();
-                    setInfo(!info);
-                  }}
-                />
-              )}
+              <button
+                type="button"
+                aria-expanded={info}
+                aria-label={info ? "Hide contact info" : "Show contact info"}
+                className="rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                onClick={() => {
+                  const audio = new Audio("click.wav");
+                  audio.play();
+                  setInfo(!info);
+                }}
+              >
+                {info ? (
+                  <BiChevronDown className="text-3xl" aria-hidden="true" />
+                ) : (
+                  <BiChevronUp className="text-3xl" aria-hidden="true" />
+                )}
+              </button>
             </div>
           </div>
         </div>

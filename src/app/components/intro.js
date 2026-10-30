@@ -19,7 +19,9 @@ export default function Intro() {
           width={300}
           height={300}
           className="mb-5"
-          alt="eyes gif"
+          alt="Animated blinking eyes"
+          unoptimized
+          priority
         />
         <TypeAnimation
           sequence={[
