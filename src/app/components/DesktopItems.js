@@ -1,12 +1,20 @@
 import React from "react";
+import Image from "next/image";
 import { FcFolder } from "react-icons/fc";
 import { VscGithubInverted } from "react-icons/vsc";
 import Link from "next/link";
 import { BiSolidFilePdf } from "react-icons/bi";
-import { FaGamepad } from "react-icons/fa";
+import { FaGamepad, FaImages } from "react-icons/fa";
 import "react-toastify/dist/ReactToastify.css";
 
-const DesktopItems = ({ isStartMenuOpen, setShowModal, setGame, setGithubOpen }) => {
+const DesktopItems = ({
+  isStartMenuOpen,
+  setShowModal,
+  setGamesOpen,
+  setGithubOpen,
+  setSubbyOpen,
+  setPhotosOpen,
+}) => {
   return (
     <div className={isStartMenuOpen ? "hidden" : "block w-full"}>
       <div className="flex flex-col items-start justify-start w-full p-8 gap-6">
@@ -60,23 +68,56 @@ const DesktopItems = ({ isStartMenuOpen, setShowModal, setGame, setGithubOpen })
           </div>
         </Link>
 
-        <Link
-          href="https://rock-paper-scissors-murphy.netlify.app"
-          aria-label="Play the Rock Paper Scissors game (opens in a new tab)"
+        <button
+          type="button"
+          className="flex flex-col items-center justify-center rounded-md relative transition duration-100 hover:shadow-xl hover:bg-slate-900 hover:bg-opacity-50 hover:backdrop-blur-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
           onClick={() => {
             const audio = new Audio("click.wav");
             audio.play();
+            setGamesOpen(true);
           }}
-          target="_blank"
-          className="rounded-md focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >
-          <div className="flex flex-col items-center justify-center rounded-md transition duration-100 hover:shadow-xl hover:bg-slate-900 hover:bg-opacity-50 hover:cursor-pointer hover:backdrop-blur-lg ">
-            <FaGamepad className="text-green-600 text-7xl" aria-hidden="true" />
-            <p className="text-white text-center mt-1 font-medium drop-shadow-md">
-              Game
-            </p>
-          </div>
-        </Link>
+          <FaGamepad className="text-green-600 text-7xl" aria-hidden="true" />
+          <p className="text-white text-center mt-1 font-medium drop-shadow-md">
+            Games
+          </p>
+        </button>
+
+        <button
+          type="button"
+          className="flex flex-col items-center justify-center rounded-md relative transition duration-100 hover:shadow-xl hover:bg-slate-900 hover:bg-opacity-50 hover:backdrop-blur-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          onClick={() => {
+            const audio = new Audio("click.wav");
+            audio.play();
+            setSubbyOpen(true);
+          }}
+        >
+          <Image
+            src="/subby.png"
+            width={70}
+            height={70}
+            className="rounded-2xl"
+            alt="Subby app icon"
+          />
+          <p className="text-white text-center mt-1 font-medium drop-shadow-md">
+            Subby
+          </p>
+        </button>
+
+        <button
+          type="button"
+          className="flex flex-col items-center justify-center rounded-md relative transition duration-100 hover:shadow-xl hover:bg-slate-900 hover:bg-opacity-50 hover:backdrop-blur-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          onClick={() => {
+            const audio = new Audio("click.wav");
+            audio.play();
+            setPhotosOpen(true);
+          }}
+        >
+          <FaImages className="text-sky-400 text-6xl" aria-hidden="true" />
+          <p className="text-white text-center mt-1 font-medium drop-shadow-md">
+            Photos
+          </p>
+        </button>
       </div>
     </div>
   );

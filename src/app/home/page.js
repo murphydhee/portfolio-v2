@@ -14,6 +14,9 @@ import PetPicker from "../components/PetPicker";
 import GithubWindow from "../components/GithubWindow";
 import ArticlesWindow from "../components/ArticlesWindow";
 import YoutubeWindow from "../components/YoutubeWindow";
+import GamesWindow from "../components/GamesWindow";
+import SubbyWindow from "../components/SubbyWindow";
+import PhotosWindow from "../components/PhotosWindow";
 
 const Page = () => {
   const [visitorName, setVisitorName] = useState("");
@@ -22,6 +25,9 @@ const Page = () => {
   const [isGithubOpen, setIsGithubOpen] = useState(false);
   const [isArticlesOpen, setIsArticlesOpen] = useState(false);
   const [isYoutubeOpen, setIsYoutubeOpen] = useState(false);
+  const [isGamesOpen, setIsGamesOpen] = useState(false);
+  const [isSubbyOpen, setIsSubbyOpen] = useState(false);
+  const [isPhotosOpen, setIsPhotosOpen] = useState(false);
 
   const [showModal, setShowModal] = useState(false);
   const [experience, setexperience] = useState(false);
@@ -69,10 +75,19 @@ const Page = () => {
       <DesktopItems
         isStartMenuOpen={isStartMenuOpen}
         setShowModal={setShowModal}
-        setGame={setGame}
+        setGamesOpen={setIsGamesOpen}
         setGithubOpen={setIsGithubOpen}
+        setSubbyOpen={setIsSubbyOpen}
+        setPhotosOpen={setIsPhotosOpen}
       />
       <Game game={game} setGame={setGame} />
+      <GamesWindow
+        isOpen={isGamesOpen}
+        onClose={() => setIsGamesOpen(false)}
+        onPlayMemoryMatch={() => setGame(true)}
+      />
+      <SubbyWindow isOpen={isSubbyOpen} onClose={() => setIsSubbyOpen(false)} />
+      <PhotosWindow isOpen={isPhotosOpen} onClose={() => setIsPhotosOpen(false)} />
       <Education education={education} setEducation={setEducation} />
       <Impact impact={impact} setImpact={setImpact} />
       <Experience experience={experience} setexperience={setexperience} />

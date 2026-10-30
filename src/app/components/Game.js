@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { MdOutlineClose } from "react-icons/md";
 import AnimatedItem from "./AnimatedItem";
+import Modal from "./Modal";
 import Image from "next/image";
 
 const cardData = [
@@ -64,9 +64,11 @@ const Game = ({ game, setGame }) => {
     const isFlipped = flipped.includes(index) || solved.includes(card.id);
 
     return (
-      <div
+      <button
+        type="button"
         key={index}
-        className={`basis-2/12 flex items-center justify-center w-[100px] h-[100px] text-center font-Rubik font-medium text-3xl cursor-pointer bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-4 rounded-xl memory-card ${
+        aria-label={isFlipped ? `Card: ${card.value}` : "Hidden card"}
+        className={`basis-2/12 flex items-center justify-center w-[100px] h-[100px] text-center font-Rubik font-medium text-3xl bg-black bg-opacity-30 border-2 border-gray-400 border-opacity-10 backdrop-blur-xl p-4 rounded-xl memory-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white ${
           isFlipped ? "flipped" : ""
         }`}
         onClick={() => {
@@ -78,53 +80,38 @@ const Game = ({ game, setGame }) => {
         {isFlipped ? (
           <Image
             src={`../../${card.imageUrl}`}
-            alt={card.value}
+            alt=""
             width={80}
             height={80}
             className="object-contain"
           />
         ) : (
-          <span>?</span>
+          <span aria-hidden="true">?</span>
         )}
-      </div>
+      </button>
     );
   };
   return (
-    <div
-      className={`fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-black bg-opacity-50 transition-opacity ${
-        game ? "opacity-100 visible" : "opacity-0 invisible"
-      }`}
+    <Modal
+      isOpen={game}
+      onClose={() => setGame(false)}
+      className="w-[1000px] h-auto overflow-y-scroll smbelow:w-[95%]"
     >
-      <div className="bg-opacity-100 backdrop-blur-3xl border border-gray-400 overflow-y-scroll  w-[1000px] h-auto p-1 rounded-lg shadow-xl  border-opacity-10">
-        <div className="flex">
-          <MdOutlineClose
-            className="text-white text-4xl ml-auto p-1  hover:bg-red-600 rounded-tr-md rounded-br-md"
-            onClick={() => {
-              const audio = new Audio("click.wav");
-              audio.play();
-              setGame(false);
-            }}
-          />
-        </div>
-
-        <div className="flex flex-col items-start justify-start  p-5">
-          <AnimatedItem animationConfig={{ delay: 0.1 }}>
-            <div className="flex flex-col w-full">
-              <h1 className="text-white">Moves: {moveCount}</h1>
-              <section className="mt-2 text-white">
-                <div className="flex justify-center items-center">
-                  <div className="memory-match-game">
-                    <div className="flex flex-row flex-wrap card-grid ">
-                      {cards.map((card, index) => renderCard(card, index))}
-                    </div>
-                  </div>
+      <AnimatedItem animationConfig={{ delay: 0.1 }}>
+        <div className="flex flex-col w-full">
+          <h1 className="text-white">Moves: {moveCount}</h1>
+          <section className="mt-2 text-white">
+            <div className="flex justify-center items-center">
+              <div className="memory-match-game">
+                <div className="flex flex-row flex-wrap card-grid ">
+                  {cards.map((card, index) => renderCard(card, index))}
                 </div>
-              </section>
+              </div>
             </div>
-          </AnimatedItem>
+          </section>
         </div>
-      </div>
-    </div>
+      </AnimatedItem>
+    </Modal>
   );
 };
 
