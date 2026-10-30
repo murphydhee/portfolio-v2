@@ -24,7 +24,7 @@ const calculateWinner = (cells) => {
 
 // A true minimax player for O — it cannot legitimately lose or even be
 // forced into anything but a win or a draw. The "VAR" gag below turns
-// every remaining draw into a win too, so the final result is always AJ,
+// every remaining draw into a win too, so the final result is always Murphy,
 // no matter what the person plays.
 const minimax = (cells, player) => {
   const result = calculateWinner(cells);
@@ -54,7 +54,7 @@ const playClick = () => {
 
 const TicTacToeGame = () => {
   const [cells, setCells] = useState(EMPTY_BOARD);
-  const [score, setScore] = useState({ you: 0, aj: 0 });
+  const [score, setScore] = useState({ you: 0, murphy: 0 });
   const [status, setStatus] = useState("playing");
   const [message, setMessage] = useState("");
   const [winLine, setWinLine] = useState(null);
@@ -63,8 +63,8 @@ const TicTacToeGame = () => {
     setStatus("var-review");
     setMessage("VAR is reviewing...");
     setTimeout(() => {
-      setMessage("VAR says O. AJ wins!");
-      setScore((s) => ({ ...s, aj: s.aj + 1 }));
+      setMessage("VAR says O. Murphy wins!");
+      setScore((s) => ({ ...s, murphy: s.murphy + 1 }));
       setStatus("over");
     }, 1200);
   };
@@ -90,8 +90,8 @@ const TicTacToeGame = () => {
     const aiResult = calculateWinner(afterAi);
     if (aiResult) {
       setWinLine(aiResult.line);
-      setScore((s) => ({ ...s, aj: s.aj + 1 }));
-      setMessage("AJ wins!");
+      setScore((s) => ({ ...s, murphy: s.murphy + 1 }));
+      setMessage("Murphy wins!");
       setStatus("over");
       return;
     }
@@ -111,7 +111,7 @@ const TicTacToeGame = () => {
   return (
     <div className="flex flex-col items-center gap-4 text-white">
       <p className="font-Rubik text-sm text-gray-300">
-        You {score.you} — {score.aj} AJ
+        You {score.you} — {score.murphy} Murphy
       </p>
       <div className="grid grid-cols-3 gap-2">
         {cells.map((cell, index) => (

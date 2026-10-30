@@ -53,7 +53,7 @@ const GamesWindow = ({
           <GameCard
             icon={<GiTicTacToe className="text-blue-400 text-5xl" aria-hidden="true" />}
             label="Tic Tac Toe"
-            blurb="You can't win. AJ sees to that."
+            blurb="You can't win. Murphy sees to that."
             onClick={() => {
               onClose();
               onPlayTicTacToe();
