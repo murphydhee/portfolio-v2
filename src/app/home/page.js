@@ -11,11 +11,17 @@ import TaskbarDock from "../components/TaskbarDock";
 import StatusBar from "../components/StatusBar";
 import DesktopPet from "../components/DesktopPet";
 import PetPicker from "../components/PetPicker";
+import GithubWindow from "../components/GithubWindow";
+import ArticlesWindow from "../components/ArticlesWindow";
+import YoutubeWindow from "../components/YoutubeWindow";
 
 const Page = () => {
   const [visitorName, setVisitorName] = useState("");
   const [petId, setPetId] = useState(null);
   const [isPetPickerOpen, setIsPetPickerOpen] = useState(false);
+  const [isGithubOpen, setIsGithubOpen] = useState(false);
+  const [isArticlesOpen, setIsArticlesOpen] = useState(false);
+  const [isYoutubeOpen, setIsYoutubeOpen] = useState(false);
 
   const [showModal, setShowModal] = useState(false);
   const [experience, setexperience] = useState(false);
@@ -64,6 +70,7 @@ const Page = () => {
         isStartMenuOpen={isStartMenuOpen}
         setShowModal={setShowModal}
         setGame={setGame}
+        setGithubOpen={setIsGithubOpen}
       />
       <Game game={game} setGame={setGame} />
       <Education education={education} setEducation={setEducation} />
@@ -77,6 +84,9 @@ const Page = () => {
         selectedPet={petId}
         onSelect={handleSelectPet}
       />
+      <GithubWindow isOpen={isGithubOpen} onClose={() => setIsGithubOpen(false)} />
+      <ArticlesWindow isOpen={isArticlesOpen} onClose={() => setIsArticlesOpen(false)} />
+      <YoutubeWindow isOpen={isYoutubeOpen} onClose={() => setIsYoutubeOpen(false)} />
       <Menu
         isStartMenuOpen={isStartMenuOpen}
         setIsStartMenuOpen={setIsStartMenuOpen}
@@ -95,6 +105,9 @@ const Page = () => {
         isClick={isClick}
         screenSet={screenSet}
         setShowModal={setShowModal}
+        setGithubOpen={setIsGithubOpen}
+        setArticlesOpen={setIsArticlesOpen}
+        setYoutubeOpen={setIsYoutubeOpen}
       />
     </main>
   );

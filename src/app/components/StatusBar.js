@@ -27,11 +27,23 @@ const StatusBar = () => {
   return (
     <div className="hidden sm:flex items-center gap-3 rounded-full bg-black bg-opacity-30 backdrop-blur-md px-4 py-1.5 text-white">
       {weather.status === "ready" ? (
-        <div className="flex items-center gap-1.5" title={weather.label}>
+        <div
+          className="flex items-center gap-1.5"
+          title={
+            weather.isFallback
+              ? `${weather.label} in ${weather.location} — that's where I am, enable location to see yours`
+              : weather.label
+          }
+        >
           <weather.Icon className="text-xl text-blue-300" aria-hidden="true" />
           <span className="text-sm font-Rubik font-light">
             {weather.temperature}°C
           </span>
+          {weather.isFallback && (
+            <span className="text-[11px] font-Rubik font-light opacity-70">
+              ({weather.location} — that&apos;s me)
+            </span>
+          )}
         </div>
       ) : (
         <div className="flex items-center gap-1.5 opacity-50">
